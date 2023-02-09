@@ -1,0 +1,26 @@
+numpy
+scikit-image
+scipy
+sklearn
+smplx
+tqdm
+yacs
+numba
+opencv-python
+tensorboardx
+filterpy
+cython
+chumpy
+Pillow
+trimesh
+pyrender
+matplotlib
+json_tricks
+torchgeometry
+einops
+joblib
+boto3
+requests
+easydict
+pycocotools
+# openpifpaf==0.13.1

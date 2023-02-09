@@ -1,0 +1,11 @@
+maxiters=30
+optimizer_config=dict(
+    type='LBFGS',
+    lr=1.0, 
+    max_iter=30, 
+    max_eval=None, 
+    tolerance_grad=1e-07, 
+    tolerance_change=1e-09, 
+    history_size=100, 
+    line_search_fn='strong_wolfe'
+)
