@@ -45,7 +45,6 @@ class SMPLifyAnglePrior(nn.Module):
         angle_prior_idxs = self.angle_prior_idxs - (not with_global_pose) * 3
         return torch.exp(pose[:, angle_prior_idxs] * self.angle_prior_signs).pow(2)
 
-# TODO@PRIOR.register_module()
 @PRIOR.register_module()
 class MaxMixturePrior(nn.Module):
     def __init__(

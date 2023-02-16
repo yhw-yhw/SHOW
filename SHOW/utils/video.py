@@ -12,12 +12,6 @@ def video():
     for actor in tqdm(filter(os.path.isdir, glob(f'./test_results/*_rgb_*'))):
         os.system(f'ffmpeg -y -framerate 30 -pattern_type glob -i \'{actor}/video/*.jpg\' -c:v libx264 {actor}.mp4')
 
-def smplpix():
-    FRAMES_DIR=r'C:\Users\lithiumice\code\speech2gesture_dataset\crop\stand\test_video\1-00_00_00-00_00_01\image'
-    VIDEO_PATH=r'C:\Users\lithiumice\code\smplpix\colab_notebooks\video.mp4'
-    os.makedirs(FRAMES_DIR, exist_ok=True)
-    cmds=f"ffmpeg -i {VIDEO_PATH} -vf fps=2  -qscale:v 2 {FRAMES_DIR}/%06d.png"
-    os.system(cmds)
 
 @logger.catch
 def video_to_images(
@@ -115,12 +109,3 @@ def frame_to_video(
     video.release()
     logger.info('frame_to_video finished')
     
-    
-if __name__ == '__main__':
-    # video()
-    # smplpix()
-    frame_to_video(
-        r'C:\Users\lithiumice\Desktop\214165-00_00_13-00_00_21',
-        video_name=r'C:\Users\lithiumice\Desktop\214165-00_00_13-00_00_21\img.mp4',
-        fps=30,size=-1
-    )

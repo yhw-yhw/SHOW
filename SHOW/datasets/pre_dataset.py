@@ -101,10 +101,6 @@ def read_deca(deca_mat_file):
 
         smplx_exp = deca_exp_to_smplx(ret['expression_params'])
 
-        # 'lmk_range':'origin',
-        # org_deca_lmk:(bs,68,2)
-        # ret['lm2d']=org_deca_lmk
-
         return_list.append({
             'face_bbox': ret['bbox'],  # array([774., 177., 969., 372.])
             'lmk2d': org_deca_lmk,  # torch.Size([1, 68, 2])

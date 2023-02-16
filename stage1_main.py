@@ -69,7 +69,7 @@ from configs.cfg_ins import condor_cfg
 from SHOW.datasets.model_func_atach import atach_model_func
 
 
-def api_smplifyx(*args, **kwargs):
+def SHOW_stage1(*args, **kwargs):
 
     machine_info = SHOW.get_machine_info()
     import pprint
@@ -91,15 +91,12 @@ def api_smplifyx(*args, **kwargs):
             logger.info(f'not loading betas')
             smplifyx_cfg.merge_from_dict(smplifyx_cfg.betas_generate)
 
-        # 当speaker不指定的时候
         if smplifyx_cfg.speaker_name == -1:
             smplifyx_cfg.use_height_constraint = False
             smplifyx_cfg.use_weight_constraint = False
 
-        # 按照不同机器的configs
         smplifyx_cfg.merge_from_dict(condor_cfg)
 
-        # 在cmd中的overwrite参数优先级最高
         if smplifyx_cfg.get('over_write_cfg', None):
             logger.info(
                 f'over_write_cfg: {smplifyx_cfg.over_write_cfg.to_dict()}')
@@ -145,7 +142,6 @@ def api_smplifyx(*args, **kwargs):
         template_im = os.listdir(img_folder)[0]
         template_im = os.path.join(img_folder, template_im)
 
-        # 加载smplx模型
         body_model = load_smplx_model(dtype=dtype,
                                       batch_size=1,
                                       **smplifyx_cfg.smplx_cfg)
@@ -154,7 +150,6 @@ def api_smplifyx(*args, **kwargs):
             body_model, *args, **kwargs)
         smplifyx_cfg.merge_from_dict(smplifyx_cfg.smplx_cfg)
 
-        # 加载原始数据集，人脸匹配
         op = op_dataset(
             config=smplifyx_cfg,
             face_ider=face_ider,
@@ -165,7 +160,6 @@ def api_smplifyx(*args, **kwargs):
         )
         op.initialize()
 
-        # 加载各种常数参数
         assets = load_assets(
             smplifyx_cfg,
             face_ider=face_ider,
@@ -184,10 +178,8 @@ def api_smplifyx(*args, **kwargs):
         lmk_faces_idx = assets['mp_lmk_emb']['lmk_face_idx']
         lmk_bary_coords = assets['mp_lmk_emb']['lmk_b_coords']
         mp_indices = assets['mp_lmk_emb']['landmark_indices']
-        # 得到optimize的每个stage的weight
         opt_weights_list = parse_weight(smplifyx_cfg, device, dtype)
         robustifier = GMoF(rho=100)
-        # 得到用于optimize的GT数据
         op.person_face_emb = assets.person_face_emb
         ret = op.get_all()
 
@@ -211,7 +203,6 @@ def api_smplifyx(*args, **kwargs):
             logger.warning(f'op_valid_flag is all False, skipping')
             return False
 
-        # 加载预先optimize出来的betas参数
         update_betas_name_cfg()
         logger.info(f'save_betas_name: {smplifyx_cfg.save_betas_name}')
         if smplifyx_cfg.use_pre_compute_betas:
@@ -221,7 +212,6 @@ def api_smplifyx(*args, **kwargs):
             else:
                 logger.warning(f'pre betas exist but shape error')
 
-        ########
         global_step = 0
         wandb_log_dict = {}
         losses_to_log = {}
@@ -263,7 +253,6 @@ def api_smplifyx(*args, **kwargs):
             torch.square(diff_kpts[:, :, 0]) +
             torch.square(diff_kpts[:, :, 1]))
         body_kpts_diff_sum = diff_kpts_dist.mean()
-        # body_kpts_diff_sum_threshold = 0.3 # normal: 1.38; lmk_gt_inner
         body_kpts_diff_sum_threshold = 0.5  # normal: 3.15; lmk_gt_outter
         if body_kpts_diff_sum < body_kpts_diff_sum_threshold:
             logger.warning(
@@ -343,19 +332,12 @@ def api_smplifyx(*args, **kwargs):
         angle_prior = build_prior(dict(type='SMPLifyAnglePrior',
                                        dtype=dtype)).to(device)
 
-        # COAP模型碰撞检测
-        if smplifyx_cfg['use_coap_loss']:
-            from modules.COAP.coap import attach_coap
-            attach_coap(body_model, device=device)
-
-        # 定义要优化的变量
         if betas.shape[-1] > smplifyx_cfg.smplx_cfg.num_betas:
             betas = betas[..., :smplifyx_cfg.smplx_cfg.num_betas]
         if expression.shape[-1] > smplifyx_cfg.smplx_cfg.num_expression_coeffs:
             expression = expression[
                 ..., :smplifyx_cfg.smplx_cfg.num_expression_coeffs]
         body_params = dict(
-            # --> 10 var start
             expression=expression,
             jaw_pose=jaw_pose,
             betas=betas,
@@ -366,11 +348,9 @@ def api_smplifyx(*args, **kwargs):
             leye_pose=leye_pose,
             reye_pose=reye_pose,
             pose_embedding=vposer.encode(pose.reshape(batch_size, -1)).mean,
-            # --> 10 var end
             mica_head_transl=mica_head_transl,
         )
 
-        # 如果保存了pkl文件则检查loss metric, load checkpoints
         if (smplifyx_cfg.load_checkpoint
                 and not Path(smplifyx_cfg.checkpoint_pkl_path).exists()):
             logger.warning(
@@ -396,19 +376,16 @@ def api_smplifyx(*args, **kwargs):
             smplifyx_cfg.start_stage = smplifyx_cfg.load_ckpt_st_stage
             smplifyx_cfg.end_stage = smplifyx_cfg.load_ckpt_ed_stage
 
-        # 即使没有ckpts也re-optimize hands
         if smplifyx_cfg.re_optim_hands:
             logger.info(f'reload hands from PIXIE/PyMAF-X')
             body_params['left_hand_pose'] = left_hand_pose
             body_params['right_hand_pose'] = right_hand_pose
 
-        # 转换成require grad的变量dict
         body_params = cvt_dict_to_grad(body_params, device, dtype)
         tpose_vertices = get_tpose_vertice(body_model, body_params['betas'])
         body_params['mica_head_transl'].data.copy_(
             cal_smplx_head_transl(tpose_vertices, smplx2flame_idx))
 
-        # 创建perspective camera, 其参数固定,不optimize
         cam_params = {'focal': op.focal, 'cam_t': op.get_smplx_to_o3d_T()}
 
         cam_params = cvt_dict_to_grad(cam_params, device, dtype)
@@ -443,15 +420,12 @@ def api_smplifyx(*args, **kwargs):
                                             start_stage:smplifyx_cfg.end_stage]
 
         for stage, curr_weights in enumerate(opt_weights_list):
-            # break
             if (Path(smplifyx_cfg.checkpoint_pkl_path).exists()
                     and smplifyx_cfg.check_pkl_metric
                     and smplifyx_cfg.load_checkpoint):
                 logger.info('jump to stage -1')
                 curr_weights = opt_weights_list[-1]
                 stage = 2
-
-            # pbar.update(1)
 
             curr_weights = EasyDict(curr_weights)
 
@@ -488,7 +462,6 @@ def api_smplifyx(*args, **kwargs):
                         for k, v in losses_to_log.items()
                     }
                     smplifyx_cfg.loggers.log_bs(wandb_log_dict)
-                    # pbar.set_description(log_str)
                 else:
                     logger.info(f'{stage}_{global_step}:{log_str}')
 
@@ -531,7 +504,6 @@ def api_smplifyx(*args, **kwargs):
                 pen_distance=pen_distance,
             )
 
-            # 如果存在pkl文件同时check_pkl_metric为True，则退出loop
             if (Path(smplifyx_cfg.checkpoint_pkl_path).exists()
                     and smplifyx_cfg.load_checkpoint
                     and smplifyx_cfg.check_pkl_metric):
@@ -541,7 +513,6 @@ def api_smplifyx(*args, **kwargs):
                 all_loss = closure()
                 break
 
-            # 每一个stage里运行maxiters个optimize
             for n in range(smplifyx_cfg.maxiters):
                 all_loss = optimizer.step(closure)
 
@@ -578,31 +549,6 @@ def api_smplifyx(*args, **kwargs):
         if not SHOW.is_valid_json(smplifyx_cfg.final_losses_json_path):
             logger.warning(f"is_valid_json, not save, return")
             return False
-
-        if smplifyx_cfg.use_smoothnet_hands:
-            from mmhuman3d.core.post_processing.builder import build_post_processing
-            smplifyx_cfg.cfg_smoothnet_w16.device = device
-            smoothenet_32 = build_post_processing(
-                smplifyx_cfg.cfg_smoothnet_w16)
-
-            lhand_axis, rhand_axis = body_model.hand_pca_to_axis(
-                body_model,
-                body_params['left_hand_pose'],
-                body_params['right_hand_pose'],
-            )
-
-            lhand_axis = lhand_axis.reshape(-1, 15, 3)
-            rhand_axis = rhand_axis.reshape(-1, 15, 3)
-            lhand_axis = smoothenet_32(lhand_axis)
-            rhand_axis = smoothenet_32(rhand_axis)
-
-            lhand_pca, rhand_pca = body_model.hand_axis_to_pca(
-                body_model,
-                lhand_axis,
-                rhand_axis,
-            )
-            body_params['left_hand_pose'] = lhand_pca.to(device)
-            body_params['right_hand_pose'] = rhand_pca.to(device)
 
         model_output, body_pose_axis = cal_model_output(
             vposer, body_model, body_params)
@@ -670,21 +616,5 @@ def api_smplifyx(*args, **kwargs):
                 or run_optimize_flag):
             logger.info(
                 f'saving final images to: {smplifyx_cfg.ours_images_path}')
-            from render_ours import render_pkl_api
+            from pkl2img import render_pkl_api
             render_pkl_api(**smplifyx_cfg)
-
-        try:
-            im_path = SHOW.find_full_impath_by_name(
-                root=smplifyx_cfg.ours_images_path, name='000001')
-            read_im = cv2.imread(im_path)
-            read_im = cv2.cvtColor(read_im, cv2.COLOR_BGR2RGB)
-
-            if read_im is not None and smplifyx_cfg.get('loggers', None):
-                smplifyx_cfg.loggers.log_image(
-                    f'{smplifyx_cfg.wandb_prefix}/final_img', read_im)
-                logger.info(
-                    f'saved final image to: {smplifyx_cfg.wandb_prefix}/final_img'
-                )
-        except:
-            import traceback
-            traceback.print_exc()

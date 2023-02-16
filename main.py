@@ -2,8 +2,8 @@ import mmcv
 import argparse
 import os
 import SHOW
-from stage1_main import api_smplifyx
-from stage2_main import api_smplify_tracker
+from stage1_main import SHOW_stage1
+from stage2_main import SHOW_stage2
 from configs.csv_parser import gen_path_from_ours_root
 from SHOW import attr_dict
 from pathlib import Path
@@ -75,13 +75,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--speaker_name',
                         type=str,
-                        default='oliver',
+                        default='-1',
                         help='if speaker_name == -1, configs are auto loaded')
     parser.add_argument(
         '--all_top_dir',
         type=str,
-        default=
-        r'C:\Users\lithiumice\code\speech2gesture_dataset\crop\oliver\gt.mp4\clip21',
+        default='./test/half.mp4',
     )
     parser.add_argument('--others_cfg',
                         type=str,
@@ -92,6 +91,7 @@ if __name__ == '__main__':
     cfg = mmcv.Config(vars(args))
 
     cfg.over_write_cfg = parse_other_Cfg(cfg.others_cfg)
+    cfg.all_top_dir = os.path.abspath(cfg.all_top_dir)
 
     tmp_dir = Path(cfg.all_top_dir)
     if tmp_dir.suffix.lower() in ['.mp4', '.avi', '.mov']:
@@ -103,15 +103,9 @@ if __name__ == '__main__':
 
         if not os.path.exists(img_path):
             img_path.mkdir(parents=True, exist_ok=True)
-            if 1:
-                os.system(
-                    f'ffmpeg -i {tmp_dir} -vf fps=30 -q:v 1 {img_path}/%06d.png'
-                )
-            else:
-                import subprocess
-                subprocess.call(
-                    f'ffmpeg -i "{tmp_dir}" -vf fps=30 -q:v 1 "{img_path}/%06d.png"'
-                )
+            os.system(
+                f'ffmpeg -i {tmp_dir} -vf fps=30 -q:v 1 {img_path}/%06d.png'
+            )
 
     temp_cfg = gen_path_from_ours_root(speaker_name=cfg.speaker_name,
                                        all_top_dir=cfg.all_top_dir,
@@ -123,5 +117,5 @@ if __name__ == '__main__':
     if (temp_cfg.speaker_name == '-1' or temp_cfg.speaker_name == None):
         temp_cfg.speaker_name = -1
 
-    api_smplifyx(**temp_cfg)
-    api_smplify_tracker(**temp_cfg)
+    SHOW_stage1(**temp_cfg)
+    SHOW_stage2(**temp_cfg)

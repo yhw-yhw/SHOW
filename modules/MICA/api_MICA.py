@@ -40,8 +40,7 @@ class api_MICA(object):
         device = 'cuda:0'
         cfg.model.testing = True
         self.mica = util.find_model_using_name(model_dir='micalib', model_name=cfg.model.name)(cfg, device)
-        model_path=os.path.join(os.path.dirname(__file__),'./data/pretrained/mica.tar')
-        self.load_checkpoint(self.mica,model_path=model_path)
+        self.load_checkpoint(self.mica,model_path=cfg.pretrained_model_path)
         self.mica.eval()
 
         self.app = FaceAnalysis(name='antelopev2', 

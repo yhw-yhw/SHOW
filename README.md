@@ -90,6 +90,8 @@ or just install the environment by using attached conda `environment.yml` file w
 
 [TODO]download_models.sh
 
+- [MMPose]: clone git repo, set env: `export mmpose_root = $mmpose_root$`
+
 - [MICA]: you can find the pretrained model in (https://github.com/Zielon/MICA)
   - install python lib for MICA:
   
@@ -97,7 +99,7 @@ or just install the environment by using attached conda `environment.yml` file w
     cd modules/MICA
     pip install -r req.txt
     ```
-- [PIXIE]: 
+- [PIXIE]: follow the installation instruction in (modules/PIXIE/README.md)
   - install python lib for MICA:
 
     ```bash
@@ -111,31 +113,25 @@ or just install the environment by using attached conda `environment.yml` file w
 
 ### Run
 
-[TODO]main.py
+running SHOW on demo video
+
+```bash
+python main.py --speaker_name -1 --all_top_dir ./test/half.mp4
+```
 
 ## Datasets
   
 ### Download Links
 
-- [[Dropbox](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
-- Google Drive: [TODO]
+- [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
+- [[Google Drive]](TODO)
 
 ### Dataset Videos Download
 
 #### Prerequisits for data download
 
-download all videos from `TODO` or youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```tools\datasets\download_youtube.py```, remember to install `yt-dlp`.
+download all videos from `TODO` or youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```tools\datasets\download_youtube.py```, remember to install `yt-dlp`. using  `tools\datasets\SHOW_intervals_subject4.csv` for video interval cropping.
 
-
-csv columns in `tools\datasets\SHOW_intervals_subject4.csv`:
-```
-speaker
-video_fn
-interval_id
-dataset
-start_time
-end_time
-```
 
 ### Visualize Dataset
 
@@ -175,7 +171,6 @@ python render_pkl_release.py \
       - reye_pose: (bs,3)
       - pose_embedding: (bs,32)
   
-    - smplx version is 2020/neutral
     - Set the config of smplx model as follows:
   
     ```python

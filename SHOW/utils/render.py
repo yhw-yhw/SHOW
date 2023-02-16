@@ -24,7 +24,6 @@ def render_shape(vertices, flame_faces, mesh_rasterizer, debug_renderer, cameras
     B = vertices.shape[0]
     V = vertices.shape[1]
 
-    # if faces is None:
     faces = flame_faces.verts_idx.cuda()[None].repeat(B, 1, 1)
 
     if not white:

@@ -51,14 +51,6 @@ def show_PIL_im_window(tensor):
     img = np.minimum(np.maximum(img, 0), 255).astype(np.uint8)
     PIL.Image.fromarray(img).show()
 
-if 0:
-    tmp=tmp_img[0].cpu().detach().numpy()*255
-    import PIL; PIL.Image.fromarray(hq_img).show()
-    import PIL; PIL.Image.fromarray(hq_faces[0]).show()
-
-if 0:
-    from SHOW.utils.disp_img import show_PIL_im_window
-    show_PIL_im_window(tmp_img[0])
     
 def save_tensor_to_file(tensor, path='tensor.jpg'):
     if isinstance(tensor, torch.Tensor):

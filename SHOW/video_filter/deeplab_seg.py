@@ -53,17 +53,9 @@ class deeplab_seg(object):
                          vis_path=vis_path if saveVis else None,
                          **kwargs)
 
-    # def vis_edt(self,):
-    #     edt_list.append(edt.squeeze())
-    #     person_mask0 = (edt[0][0]*5.0).astype(np.uint8)
-    #     out_img = Image.fromarray(person_mask0)
-    #     out_img.save('test.jpg')
 
     def predict(self, im_path, vis_path=None, save_mode='bin'):
-        # save_mode=crop/mask/bin
         sample_img = cv2.imread(im_path)
-        # self.predict_size=(1280,720)
-        # sample_img = cv2.resize(sample_img, self.predict_size)
         input_tensor = self.deeplab_preprocess(sample_img)
         input_tensor = input_tensor.to(self.device).unsqueeze_(dim=0)
 
@@ -72,12 +64,6 @@ class deeplab_seg(object):
 
         self.person_seg = torch.logical_not(output.argmax(1) == 15).to(
             torch.float)
-        # self.person_seg = self.person_seg.cpu().numpy()
-
-        # self.seg_out_shape = self.person_seg[0].shape
-        # self.seg_out_size = self.seg_out_shape[0] * self.seg_out_shape[1]
-        # self.seg_out_person_radio = (
-        #     1 - self.person_seg[1]).sum() / self.seg_out_size
 
         if vis_path is not None:
             if save_mode == 'crop':
@@ -86,8 +72,6 @@ class deeplab_seg(object):
                 self.save_org_mask(self.person_seg, vis_path, sample_img)
             elif save_mode == 'bin':
                 self.save_mask(self.person_seg, vis_path)
-
-        # return self.person_seg, self.seg_out_person_radio
 
     def save_org_mask(self,
                       person_seg_org,
@@ -110,12 +94,9 @@ class deeplab_seg(object):
         color_seg = color_seg[..., ::-1]
         # convert to BGR
 
-        # color_seg=person_seg*color
-
         sample_img[person_seg[:,:,0] == 1, :]=\
             sample_img[person_seg[:,:,0] == 1, :]*(1-opacity)
         sample_img = sample_img + (opacity * color_seg)
-        # sample_img=(1-opacity)*sample_img+opacity*color_seg
 
         out_img = Image.fromarray(sample_img.astype(np.uint8))
         out_img.save(vis_path)
@@ -126,7 +107,6 @@ class deeplab_seg(object):
         if isinstance(person_seg_org, torch.Tensor):
             person_seg = person_seg_org.cpu().numpy()
 
-        # person_mask0 = (person_seg[0]*255.0)
         person_seg = person_seg.transpose(1, 2, 0)
         sample_img = sample_img * (1 - person_seg)
         sample_img = sample_img + person_seg * 255

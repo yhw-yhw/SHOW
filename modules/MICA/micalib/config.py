@@ -22,12 +22,15 @@ from yacs.config import CfgNode as CN
 
 cfg = CN()
 
-abs_mica_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+abs_mica_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../..','models/models_MICA'))
+# abs_mica_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 cfg.mica_dir = abs_mica_dir
 cfg.device = 'cuda'
 cfg.device_id = '0'
-cfg.pretrained_model_path = os.path.join(cfg.mica_dir, 'data/pretrained', 'mica.tar')
+cfg.pretrained_model_path = os.path.join(cfg.mica_dir, 'pretrained', 'mica.tar')
 cfg.output_dir = ''
+cfg.FLAME_masks=os.path.join(cfg.mica_dir, 'FLAME2020/FLAME_masks/FLAME_masks.pkl')
+cfg.generic_model=os.path.join(cfg.mica_dir, 'FLAME2020/generic_model.pkl')
 
 # ---------------------------------------------------------------------------- #
 # Options for Face model
@@ -36,9 +39,13 @@ cfg.model = CN()
 cfg.model.testing = False
 cfg.model.name = 'mica'
 
-cfg.model.topology_path = os.path.join(cfg.mica_dir, 'data/FLAME2020', 'head_template.obj')
-cfg.model.flame_model_path = os.path.join(cfg.mica_dir, 'data/FLAME2020', 'generic_model.pkl')
-cfg.model.flame_lmk_embedding_path = os.path.join(cfg.mica_dir, 'data/FLAME2020', 'landmark_embedding.npy')
+cfg.model.topology_path = os.path.join(cfg.mica_dir, 'FLAME2020', 'head_template.obj')
+cfg.model.flame_model_path = os.path.join(cfg.mica_dir, 'FLAME2020', 'generic_model.pkl')
+cfg.model.flame_lmk_embedding_path = os.path.join(cfg.mica_dir, 'FLAME2020', 'landmark_embedding.npy')
+
+# cfg.model.topology_path = os.path.join(cfg.mica_dir, '../../../data', 'head_template.obj')
+# cfg.model.flame_model_path = os.path.join(cfg.mica_dir, '../../../data', 'generic_model.pkl')
+# cfg.model.flame_lmk_embedding_path = os.path.join(cfg.mica_dir, '../../../data', 'landmark_embedding.npy')
 cfg.model.n_shape = 300
 cfg.model.layers = 8
 cfg.model.hidden_layers_size = 256

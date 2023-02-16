@@ -31,7 +31,6 @@ def save_one_results(
     input_renderer=None,
 ):
 
-    # run_type=meta_data['run_type']
     save_smplpix_name=meta_data.get('save_smplpix_name',None)
     input_img=meta_data.get('input_img',None)
     output_name=meta_data.get('output_name',None)
@@ -49,7 +48,6 @@ def save_one_results(
             np.radians(180), [1, 0, 0]))
         
         mesh = pyrender.Mesh.from_trimesh(out_mesh, smooth=False, wireframe=False)
-        # 白色背景
         bg_color=[1.0, 1.0, 1.0, 0.0]
     else:
         color=colors_dict[color_type]
@@ -61,19 +59,9 @@ def save_one_results(
         out_mesh.apply_transform(trimesh.transformations.rotation_matrix(
             np.radians(180), [1, 0, 0]))
         
-        # out_mesh.apply_transform(trimesh.transformations.rotation_matrix(
-            # math.radians(180), [1, 0, 0]))
-        
         mesh = pyrender.Mesh.from_trimesh(
             out_mesh,
-            # material=pyrender.MetallicRoughnessMaterial(
-            #     metallicFactor=0.0,
-            #     wireframe=True,
-            #     roughnessFactor=.5,
-            #     alphaMode='OPAQUE',
-            #     # baseColorFactor=(0.9, 0.5, 0.9, 1)
-            #     baseColorFactor=(1.0, 1.0, 0.9, 1.0)
-            # )
+
             material = pyrender.MetallicRoughnessMaterial(
                 metallicFactor=0.2,
                 roughnessFactor=0.6,
@@ -81,13 +69,11 @@ def save_one_results(
                 baseColorFactor=(color[0], color[1], color[2], 1.0)
             )
             )
-        # 黑色背景
         bg_color=[0.0, 0.0, 0.0, 0.0]
         
         if obj_path is not None:
             out_mesh.export(obj_path)
        
-    # 渲染器参数设置 
     if input_renderer is None:
         
         import platform
@@ -139,8 +125,6 @@ def save_one_results(
 
     color, _ = renderer.render(scene, flags=pyrender.RenderFlags.RGBA)
     color = color.astype(np.float32) / 255.0
-
-    # 导出图像文件
 
     if save_smplpix_name is not None:
         Path(save_smplpix_name).parent.mkdir(exist_ok=True,parents=True)

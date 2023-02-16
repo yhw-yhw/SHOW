@@ -67,7 +67,6 @@ class ImagesDataset(Dataset):
 
         assert(Path(self.source).exists())
 
-        # 如果是MP4文件则在文件同级的文件夹下新建image文件夹:
         # if self.source == '/top1/top2/source.mp4'
         # then self.source = '/top1/top2/image'
         if self.source.suffix in ['.mp4', '.avi']:
@@ -92,7 +91,6 @@ class ImagesDataset(Dataset):
                 import sys
                 sys.exit()
                 
-        # 截取一个片段
         starting = self.start_frame
         if self.config.use_keyframes:
             starting = self.config.keyframes[0]
@@ -120,7 +118,6 @@ class ImagesDataset(Dataset):
             )
             del mica_ins
             
-        # FLAME作为reg的shape
         if self.shape_path != '':
             assert(Path(self.shape_path).exists())
             self.shape = np.load(self.shape_path)
@@ -129,19 +126,6 @@ class ImagesDataset(Dataset):
             self.shape = np.zeros((1, 3))
             
         self.correspond_center=None
-
-
-
-    def get_dense_face(self, image, lmk_path_dense, save_npz=True, save_empty=True):
-        dense_lmks, _ = self.face_detector_mediapipe.dense_multi_face(image)
-
-        Path(lmk_path_dense).parent.mkdir(parents=True, exist_ok=True)
-
-        if dense_lmks is not None:
-            dense_lmks = np.array(dense_lmks)
-            if save_npz:
-                np.save(lmk_path_dense, dense_lmks)
-        return dense_lmks
 
     def get_lmk_face(self, image, lmk_path, save_npz=True, save_empty=True):
         lmks = self.face_detector.get_landmarks(image)  # list
@@ -152,7 +136,6 @@ class ImagesDataset(Dataset):
             lmks = np.array(lmks)
             if save_npz:
                 np.save(lmk_path, lmks)
-        # None / ndarray
         return lmks
 
     def __len__(self):
@@ -161,34 +144,24 @@ class ImagesDataset(Dataset):
     def __getitem__(self, index):
         imagepath = self.images[index]
         image_tem = Path(imagepath).stem
-
-        # 读取原图像
         cv2_image = cv2.imread(imagepath)
         pil_image = Image.open(imagepath).convert("RGB")
         orig_width, orig_height = pil_image.size
         image = F.to_tensor(pil_image)
 
         ############################################################
-        # 读取npy文件
         lmk_root = Path(self.config.fan_npy_folder)
         lmk_root.mkdir(exist_ok=True, parents=True)
         lmk_path = lmk_root.joinpath(f'{image_tem}.npy')
         
-        # npy文件内容为空则说明没有检测到人，lmk_list维度为3
         if not os.path.exists(lmk_path):
             lmk_list = self.get_lmk_face(np.array(pil_image), lmk_path)
         else:
-            # (1, 68, 2)
             lmk_list = np.load(lmk_path, allow_pickle=True)
 
-
-        ####################################################
-        # 匹配人脸,lmk/dense_lmk的维度应为2
         lmk=None
         dist1=dist2=np.inf
         is_person_deted = False
-        
-        # self.config.no_use_face_match = True
         
         if lmk_list is not None and lmk_list.any():
             
@@ -238,11 +211,9 @@ class ImagesDataset(Dataset):
                         
         ####################################################
         if is_person_deted:
-            # 匹配到人脸，用lmk生成包络的bbox，扩大2倍并去掉超出边界的部分, 非正方形
             cropped_lmk, cropped_dense_lmk, cropped_image, self.bbox = landmark_crop(
                     image, lmk, lmk, bb_scale=self.bbox_scale)
 
-            # 将短的边扩展并补0，使得图像变为正方形，并缩放到512*512
             px = py = -1
             cropped_image, cropped_lmk, cropped_dense_lmk, px, py = squarefiy(
                 cropped_image, cropped_lmk, cropped_dense_lmk, size=self.square_size)
@@ -251,7 +222,6 @@ class ImagesDataset(Dataset):
             bbox = self.bbox
 
         else:
-            # 没有检测到人则返回占位数组
             logger.info(f'is_person_deted False')
             self.correspond_center=None
             
@@ -269,13 +239,8 @@ class ImagesDataset(Dataset):
 
         return {
             'image': image,
-            # (68,2)
             'lmk': torch.from_numpy(lmk).float(),
             'cropped_lmk': torch.from_numpy(cropped_lmk).float(),
-            # 478,2
-            # 'dense_lmk': torch.from_numpy(np.zeros((478, 2))).float(),
-            # 'cropped_dense_lmk': torch.from_numpy(cropped_dense_lmk).float(),
-            # [3, 512, 512])
             'cropped_image': cropped_image,
             
             'index': index,

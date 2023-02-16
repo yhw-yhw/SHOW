@@ -88,12 +88,6 @@ def read_shape(speaker_ply_file_path):
 
 def load_assets(config, face_ider=None, template_im=None, **kwargs):
 
-    # 丢进该算法的数据前提：
-    # 1、所有的图片都要包含人体
-    # 2、第一张图片用于决定重要的参数，比如face id
-    # 3、包含一个或者多个人体（多个人的时候而且没有指定speaker的时候的策略？）
-    # 4、选取目标的准则：bbox的面积？；同时处理多人？
-
     assets_root = config.assets_root
     dtype = config.dtype
     device = config.device
@@ -123,64 +117,25 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
         config.load_betas = False
         config.save_betas = False
 
-        # 尝试找到图片中的person, note: 该方法只能用于单人
         max_person_crop_im = get_possible_person(poser, template_im)
         if max_person_crop_im is None:
             logger.error(f'max_person_crop_im is None')
             return
 
-        # 当人体box也检测不到人脸的时候，person_face_emb = None
         face_ider_ret = face_ider.get(max_person_crop_im)
         if face_ider_ret is None:
             logger.error(f'face_ider_ret is None')
             ret_dict.person_face_emb = None
-            # return
         else:
             cur_speaker_feat = face_ider_ret[0].normed_embedding
-            if False:
-                # TODO: 使用聚类分析
-                is_match_sucess = False
-                for ref_shape_id, emb_list in emb_res_factory.items():
-                    sim_list = [
-                        face_ider.cal_emb_sim(cur_speaker_feat, ref_emb)
-                        for ref_emb in emb_list
-                    ]
-                    if any([sim > 0.6 for sim in sim_list]):
-                        logger.info(f'match sucess.')
-                        shape_id = ref_shape_id
-                        is_match_sucess = True
-                        if any([sim < 0.6 for sim in sim_list]):
-                            logger.info(f'adding current feat to shape_id: {shape_id}')
-                            emb_res_factory[shape_id].append(cur_speaker_feat)
-                            emb_res_factory_is_changed_flag = True
-                        break
-                if not is_match_sucess:
-                    shape_id = ''.join(
-                        random.sample(string.ascii_letters + string.digits, 12))
-                    emb_res_factory[shape_id] = [cur_speaker_feat]
-                    emb_res_factory_is_changed_flag = True
-                    logger.info(f'match failed, add new: {shape_id}')
-                    
-            else:
-                logger.warning('not using cluster analysis')
-                use_direct_face_emb = True
-                
-                if False:
-                    mica_out_ply_f = tempfile.NamedTemporaryFile(suffix='.ply',
-                                        prefix='mica_')
-                    logger.warning(f'mica_out_ply_f: {mica_out_ply_f.name}')
-                    mica_out_ply = mica_out_ply_f.name
-                    shape_id=Path(mica_out_ply).stem
-                    
-                    mica_out_img = None
-                    mica_out_npy = None
-                else:
-                    shape_id=os.urandom(24).hex()
-                    mica_out_ply = os.path.join(tempfile.gettempdir(), f'{shape_id}.ply')
-                    
-                    mica_out_img = None
-                    mica_out_npy = None
-                
+            use_direct_face_emb = True
+        
+            shape_id=os.urandom(24).hex()
+            mica_out_ply = os.path.join(tempfile.gettempdir(), f'{shape_id}.ply')
+            
+            mica_out_img = None
+            mica_out_npy = None
+            
             ret_dict.person_face_emb = cur_speaker_feat
             
         del poser
@@ -239,7 +194,6 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
     logger.info(f'shape_id/speaker_name: {shape_id}')
 
 
-    # FLAME的exp转SMPLX的矩阵
     flame2020to2019_exp_trafo = './flame2020to2019_exp_trafo.npy'
     flame2020to2019_exp_trafo = os.path.abspath(
         os.path.join(assets_root, flame2020to2019_exp_trafo))
@@ -248,7 +202,6 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
         device).to(dtype)
     ret_dict.flame2020to2019_exp_trafo = flame2020to2019_exp_trafo
 
-    # mediapipe的landmark转smplx的index
     mediapipe_landmark_embedding = './mediapipe_landmark_embedding__smplx.npz'
     mediapipe_landmark_embedding = os.path.abspath(
         os.path.join(assets_root, mediapipe_landmark_embedding))
@@ -265,7 +218,6 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
             device).to(dtype)
     ret_dict.mp_lmk_emb = mp_lmk_emb
 
-    # FLAME的各种mask
     FLAME_masks = './FLAME_masks.pkl'
     FLAME_masks = os.path.abspath(os.path.join(assets_root, FLAME_masks))
     with open(FLAME_masks, 'rb') as f:
@@ -275,7 +227,6 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
             FLAME_masks[key]).to(device).to(dtype)
     ret_dict.FLAME_masks = FLAME_masks
 
-    # SMPLX转FLAME的index
     smplx2flame_idx = './SMPL-X__FLAME_vertex_ids.npy'
     smplx2flame_idx = os.path.abspath(
         os.path.join(assets_root, smplx2flame_idx))
@@ -288,10 +239,5 @@ def load_assets(config, face_ider=None, template_im=None, **kwargs):
     vertex_colors = os.path.abspath(os.path.join(assets_root, vertex_colors))
     vertex_colors = np.loadtxt(vertex_colors)
     ret_dict.vertex_colors = vertex_colors
-
-    ref_tex = r'./002.flame'
-    ref_tex = os.path.abspath(os.path.join(assets_root, ref_tex))
-    ref_tex = torch.load(ref_tex)
-    ret_dict.ref_tex = ref_tex
 
     return ret_dict

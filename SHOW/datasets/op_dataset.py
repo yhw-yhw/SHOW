@@ -727,13 +727,6 @@ class op_dataset(op_base):
             self.optim_weights[:, :25] = 1  # body
             self.optim_weights[:, 25:67] = 2  # hand
             self.optim_weights[:, 67:] = 0  # face
-            
-        if 0:
-            foot_idx_to_ignore=[
-                24,22,23,
-                21,19,20
-            ]
-            self.optim_weights[:, foot_idx_to_ignore, :]=0
-        
+
         # print(self.optim_weights)
         return self.optim_weights

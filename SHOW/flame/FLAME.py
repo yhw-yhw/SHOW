@@ -264,7 +264,7 @@ class FLAMETex(nn.Module):
         super(FLAMETex, self).__init__()
         tex_space = np.load(config.tex_space_path)
         mu_key = 'MU'
-        pc_key = 'PC'
+        pc_key = 'PC'   
         n_pc = 199
         texture_mean = tex_space[mu_key].reshape(1, -1)
         texture_basis = tex_space[pc_key].reshape(-1, n_pc)

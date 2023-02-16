@@ -26,18 +26,17 @@ logs/
 *.pyc
 __pycache__
 build
+test
+
 
 *.jpg
 *.png
 *.webm
-*.mp4
 *.avi
 *.html
 *.pyc
 *.o
 *.so
-*.jpg
-*.png
 *.obj
 *.npy
 *.npz
@@ -194,7 +193,5 @@ models/*
 !data/id_pic
 !test/*.py
 
-!doc/images/*.png
-!doc/images/*.jpg
 !doc/*.jpg
 !doc/*.png

@@ -81,12 +81,7 @@ class op_post_process(object):
         self.mica_head_transl = np.zeros((1, 3))
         self.leye_pose = np.zeros((batch_size, 3))
         self.reye_pose = np.zeros((batch_size, 3))
-        
-        if 0:
-            self.transl = self.cam_transl - self.cam_transl[0]
-            # self.transl = -self.transl
-        else:
-            self.transl = np.zeros((batch_size, 3))
+        self.transl = np.zeros((batch_size, 3))
         
         ret_dict=dict(
             init_data=dict(
@@ -142,13 +137,9 @@ class op_post_process(object):
         self.op_kpts_list = []
         self.deca_kpts_list = []
         self.seg_list = []
-        
-        # TODO 从后往前检查empty并向前填充
         last_nonempty=dict(
             pixie=None,
             deca=None,
-            # op=None,
-            # mp=None,
         )
         for i in range(len(self.all_processed_item)):
             item_pos=len(self.all_processed_item)-1-i

@@ -59,7 +59,7 @@ from SHOW.utils import is_valid_json
 from configs.cfg_ins import condor_cfg
 
 
-def api_smplify_tracker(*args, **kwargs):
+def SHOW_stage2(*args, **kwargs):
 
     machine_info = SHOW.get_machine_info()
     import pprint
@@ -96,13 +96,11 @@ def api_smplify_tracker(*args, **kwargs):
     device = tracker_cfg.device
     tracker_cfg.dtype = dtype = SHOW.str_to_torch_dtype(tracker_cfg.dtype)
 
-    # assets=load_assets(tracker_cfg)
     face_ider = SHOW.build_ider(tracker_cfg.ider_cfg)
     img_folder = tracker_cfg.img_folder
     template_im = os.listdir(img_folder)[0]
     template_im = os.path.join(img_folder, template_im)
 
-    # 加载各种常数参数
     assets = load_assets(
         tracker_cfg,
         face_ider=face_ider,
@@ -182,8 +180,6 @@ def api_smplify_tracker(*args, **kwargs):
                                        diffuse_color=((0.5, 0.5, 0.5), ))))
 
     pre_frame_exp = None
-    
-    # (start_frame,end_frame) 是在原始pkl文件中的绝对位置
     for opt_idx, (start_frame, end_frame) in enumerate(st_et_list):
         if assets.person_face_emb is not None:
             mica_part_file_path = f'w_mica_part_{start_frame}_{end_frame}_{opt_idx}_{opt_iters}.pkl'
@@ -270,10 +266,10 @@ def api_smplify_tracker(*args, **kwargs):
                     tmp = body_params_dict['body_pose_axis'][
                         start_frame:end_frame, ...].clone().detach()
                     tmp = tmp.reshape(tmp.shape[0], -1, 3)
-                    return torch.stack([tmp[:, 12 - 1, :], tmp[:, 15 - 1, :]],
+                    return torch.stack([tmp[:, 12 - 1, :], 
+                                        tmp[:, 15 - 1, :]],
                                        dim=1)
 
-                # 在本程序中只optimize在start，end之间的params，并保存
                 def clone_params_color(start_frame, end_frame):
                     opt_var_clone_detach = [
                         {
@@ -563,7 +559,6 @@ def api_smplify_tracker(*args, **kwargs):
                                     return x.pow(2)
 
                                 if cur_exp.shape[0] > 2:
-                                    pass
                                     losses['loss_sexp'] = temporary_loss(
                                         1.0, 2.0, pow, cur_exp)
                                     losses['loss_sjaw'] = temporary_loss(
@@ -605,7 +600,7 @@ def api_smplify_tracker(*args, **kwargs):
                                 if report_wandb:
                                     if globals().get('wandb', None) is None:
                                         os.environ[
-                                            'WANDB_API_KEY'] = 'e3d537403fce5c8a99893c2cbe20a8d49a79358d'
+                                            'WANDB_API_KEY'] = 'xxx'
                                         os.environ['WANDB_NAME'] = 'tracker'
                                         import wandb
                                         wandb.init(
@@ -730,7 +725,6 @@ def api_smplify_tracker(*args, **kwargs):
                             fps=30,
                         )
 
-            # 保存finetune过的pkl
             dict_to_save = dict(
                 expression=body_params_dict['expression']
                 [start_frame:end_frame].clone().detach().cpu().numpy(),
@@ -825,7 +819,6 @@ def api_smplify_tracker(*args, **kwargs):
                         save_callback,
                     )
 
-    # cvt all frames to video
     if not Path(tracker_cfg.mica_org_out_video).exists():
         if not SHOW.is_empty_dir(tracker_cfg.mica_org_out_path):
             images_to_video(

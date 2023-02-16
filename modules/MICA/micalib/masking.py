@@ -39,17 +39,20 @@ class Struct(object):
         for key, val in kwargs.items():
             setattr(self, key, val)
 import os
-FLAME_masks=os.path.join(os.path.dirname(__file__),'..','./data/FLAME2020/FLAME_masks/FLAME_masks.pkl')
-generic_model=os.path.join(os.path.dirname(__file__),'..','./data/FLAME2020/generic_model.pkl')
+# FLAME_masks=os.path.join(os.path.dirname(__file__),'..','./data/FLAME2020/FLAME_masks/FLAME_masks.pkl')
+# generic_model=os.path.join(os.path.dirname(__file__),'..','./data/FLAME2020/generic_model.pkl')
+
+# FLAME_masks=os.path.join(os.path.dirname(__file__),'../../../..','models/models_MICA/FLAME2020/FLAME_masks.pkl')
+# generic_model=os.path.join(os.path.dirname(__file__),'../../../..','models/models_MICA/FLAME2020/generic_model.pkl')
 
 class Masking(nn.Module):
     def __init__(self, config):
         super(Masking, self).__init__()
-        with open(FLAME_masks, 'rb') as f:
+        with open(config.FLAME_masks, 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             self.masks = Struct(**ss)
 
-        with open(generic_model, 'rb') as f:
+        with open(config.generic_model, 'rb') as f:
             ss = pickle.load(f, encoding='latin1')
             flame_model = Struct(**ss)
 

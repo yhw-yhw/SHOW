@@ -88,8 +88,6 @@ class arcface_ider(ider_base):
             logger.warning(f'img det return None bbox')
             return None
 
-        # import PIL; PIL.Image.fromarray(img).show()
-        # import pdb; pdb.set_trace()
         crop_im_bs = mmcv.image.imcrop(img, np.array(bboxes))
 
         for crop_im, bbox in zip(crop_im_bs, bboxes):

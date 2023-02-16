@@ -6,7 +6,7 @@ log_config_tracker_nep = dict(
              init_kwargs=dict(
                  name='test',
                  project='lithiumice/tracker',
-                 api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJjYzVkZmE4MC1hYzI4LTQ1ZDYtYjY4Yy1hY2RhM2MwMzY0Y2UifQ==",
+                 api_token="==",
                  )) 
     ])  
 
@@ -18,7 +18,7 @@ log_config_smplifyx_nep = dict(
              init_kwargs=dict(
                  name='test',
                  project='lithiumice/smplifyx',
-                 api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJjYzVkZmE4MC1hYzI4LTQ1ZDYtYjY4Yy1hY2RhM2MwMzY0Y2UifQ==",
+                 api_token="==",
                  )) 
     ])  
 
@@ -27,7 +27,7 @@ log_config_smplifyx_wandb = dict(
     hooks=[ 
         dict(type='MyWandbLogger', 
              log_artifact=False,
-             wandb_key='e3d537403fce5c8a99893c2cbe20a8d49a79358d',
+             wandb_key='',
              wandb_name='NEED_TO_BE_FILLED',
              init_kwargs=dict(
                  reinit=True,
@@ -41,7 +41,7 @@ log_config_tracker_wandb = dict(
     hooks=[ 
         dict(type='MyWandbLogger', 
              log_artifact=False,
-             wandb_key='e3d537403fce5c8a99893c2cbe20a8d49a79358d',
+             wandb_key='',
              wandb_name='NEED_TO_BE_FILLED',
              init_kwargs=dict(
                  reinit=True,
