@@ -1,19 +1,6 @@
 # SHOW: Synchronous HOlistic body in the Wild
 <b>Generating Holistic 3D Human Motion from Speech</b>
 
-<!-- <h4 align="center"><b><a href="https://zielon.github.io/" target="_blank">hongwei</a>, <a href="https://sites.google.com/site/bolkartt/" target="_blank">...</a></b></h4> -->
-
-<!-- <h6 align="center"><i>Max Planck Institute for Intelligent Systems, Tübingen, Germany</i></h6> -->
-
-<!-- <h4 align="center">
-<a href="https://youtu.be/vzzEbvv08VA" target="_blank">Video&nbsp</a>
-<a href="https://arxiv.org/pdf/2204.06607.pdf" target="_blank">Paper&nbsp</a>
-<a href="https://zielon.github.io/mica/" target="_blank">Project Website&nbsp</a>
-<a href="https://github.com/Zielon/MICA/tree/master/datasets/" target="_blank"><b>Dataset&nbsp</b></a>
-<a href="https://keeper.mpdl.mpg.de/f/6b12c44378e64738b993/" target="_blank">Supplemental&nbsp</a>
-<a href="mailto:&#109;&#105;&#099;&#097;&#064;&#116;&#117;&#101;&#046;&#109;&#112;&#103;&#046;&#100;&#101;">Email</a>
-</h4> -->
-
 [[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](export.arxiv.org/abs/2212.04420)] [[Colab](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)]
 
 <p align="center"> 
@@ -22,22 +9,19 @@
 
 <!-- ![Teaser SHOW](doc/images/overview.png) -->
 
-<p align="center">The architecture of SHOW. It consists of initialization and optimization modules. <p align="center">
-
-<!-- Specifically, given an input the image sequence,firstly, PIXIE [5], DECA [4] and PyMAF-X [14] are used to initialize the parameters of SMPL-X. Secondly, the optimization routine incorporates body silhouettes from DeepLab V3 [3], facial landmarks from MediaPipe [8], and facial shapes from MICA [15]. Then, it uses a photometric loss between the rendered faces and the input image to better capture facial details. Lastly, SHOW outputs the final results. -->
-
-Generating Holistic 3D Human Motion from Speech: This work addresses the problem of generating 3D holistic body motions from human speech. Given a speech recording, we synthesize sequences of 3D body poses, hand gestures, and facial expressions that are realistic and diverse. To achieve this, we first build a high-quality dataset of 3D holistic body meshes with synchronous speech. 
+<p align="center">The architecture of SHOW. Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. <p align="center">
 
 This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Please refer to the [arXiv paper](export.arxiv.org/abs/2212.04420) for more details.
 
-The main features:
+
+What you can use:
 
 * **easy and efficient:** adapts SMPLify-X to the videos of
 talking persons with several good practices.
 * **state-of-art:** Compared to other methods, ours produces more accurate and stable results with details.
 
 ![demo](doc/images/rec_results_detial.png)
-[TODO]demo video
+- [ ] demo video
 
 ## Getting Started
 
@@ -88,7 +72,7 @@ or just install the environment by using attached conda `environment.yml` file w
 
 ### Preliminary
 
-[TODO]download_models.sh
+- [ ] download_models.sh
 
 - [MMPose]: clone git repo, and set env
 
@@ -259,4 +243,6 @@ Here are some great resources we benefit:
   
 ## Contact
 
-For questions, please contact [hongwei.yi@tuebingen.mpg.de](mailto:hongwei.yi@tuebingen.mpg.de) or [fthualinliang@mail.scut.edu.cn](mailto:fthualinliang@mail.scut.edu.cn).`
+For questions, please contact talkshow@tue.mpg.de or [hongwei.yi@tuebingen.mpg.de](mailto:hongwei.yi@tuebingen.mpg.de) or [fthualinliang@mail.scut.edu.cn](mailto:fthualinliang@mail.scut.edu.cn).`
+
+For commercial licensing, please contact ps-licensing@tue.mpg.de
