@@ -12,7 +12,6 @@ from .utils import *
 from .face_iders import *
 from .loggers import *
 from .image import *
-from .ports import *
 from .detector import *
 
 from mmcv.runner import OPTIMIZERS

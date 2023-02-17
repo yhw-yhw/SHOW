@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "build",
+			"label": "act",
+			"command": "C:\\ProgramData\\Anaconda3\\Scripts\\activate my_torch39",
+			"args": [
+			],
+			"problemMatcher": []
+		}
+	]
+}

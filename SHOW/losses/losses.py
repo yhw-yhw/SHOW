@@ -94,20 +94,7 @@ def cal_model_output(vposer=None,body_model=None,body_params=None):
         ).view(-1,63)
         cur_bs=cur_pose.shape[0]
     
-    if False:
-        # TODO: expriments, 
-        from SHOW.constants import sitting_pose
-        ref_idx = [1, 2, 4, 5, 7, 8, 10, 11]
-        cur_pose_unbind=torch.unbind(cur_pose,dim=-1)
-        for i in ref_idx:#i=ref_idx[0]
-            for j in range(3):#j=2
-                cur_pose_unbind[(i - 1) * 3 + j].data.copy_(
-                    torch.tensor(sitting_pose[(i) * 3 + j])
-                )
-        cur_pose=torch.stack(cur_pose_unbind,dim=-1)
-
     model_output = body_model(
-        # batch_size=cur_bs,
         return_verts=True,
         return_full_pose=True,
 
@@ -221,12 +208,10 @@ def create_closure(
         lmk_pre_outter = lmk_face68[:, 51:, :]
         lmk_pre_inner = lmk_face68[:, :51, :]
 
-        # show_face(lmkall_proj[0].detach().cpu().numpy())
         tpose_vertices = get_tpose_vertice(
             body_model, body_params['betas'])
 
         # torch.Size([192, 105, 2])
-        # mp_pre_lmk=get_mp_pre_lmk()
         mp_pre_lmk = vertices2landmarks(
             model_output_vertices, body_model_face, lmk_faces_idx, lmk_bary_coords)
         mp_pre_lmk_2d = camera_org.transform_points_screen(mp_pre_lmk)[
@@ -242,29 +227,13 @@ def create_closure(
             if iter_num-org_B/opt_bs_at_a_time!=0:
                 iter_num+=1
                 
-            # if meta_data['step'] % 30 == 0:
-            # pred_mask=torch.zeros()
             for i in range(iter_num):#i=0
                 vertices=model_output_vertices[i*opt_bs_at_a_time:(i+1)*opt_bs_at_a_time]
                 B = vertices.shape[0]
                 V = vertices.shape[1]
                 
-                
-                # verts_rgb = torch.from_numpy(np.array([1.0, 1.0, 1.0])).cuda().float()[
-                #     None, None, :].repeat(B, V, 1)
-                # textures = TexturesVertex(verts_features=verts_rgb.cuda())
-                # meshes_world = Meshes(verts=[vertices[i] for i in range(B)], faces=[
-                #                     faces[i] for i in range(B)], textures=textures)
-                
                 faces = body_model_face[None].repeat(B, 1, 1)
                 meshes_world = Meshes(verts=vertices.float(), faces=faces.long())
-                
-                
-                # fragments = mesh_rasterizer(meshes_world, cameras=camera_org)
-                # # pix_to_face = fragments.pix_to_face
-                # # vismask = (pix_to_face > -1).float()
-                # rendering = debug_renderer.shader(fragments, meshes_world, cameras=camera_org)
-                
                 
                 lights = PointLights(device=device, location=[[0.0, 0.0, -3.0]])
                 images_predicted = renderer_silhouette(meshes_world, cameras=camera_org, lights=lights)
@@ -272,77 +241,11 @@ def create_closure(
                 alpha_list.append(predicted_silhouette)
                 
             pred_mask=torch.cat(alpha_list, dim=0)
-                
-                # from SHOW import show_PIL_im_window
-                # show_PIL_im_window(predicted_silhouette)
-                
-                # predicted_silhouette.requires_grad
-                # loss_silhouette = ((predicted_silhouette - target_silhouette[j]) ** 2).mean()
-                # loss["silhouette"] += loss_silhouette / num_views_per_iteration
-                
-                # rendering = rendering.permute(0, 3, 1, 2)
-                # mesh = rendering[:, 0:1, :, :]
-                # alpha = 1.0 - (mesh == 1.0).int()
-                # alpha_list.append(alpha)
-            
-            # pred_mask=torch.cat(alpha_list, dim=0)
-            # pred_mask=pred_mask.permute(1,0,2,3)
-            
-            
             temp=compute_edges(pred_mask)
-            
-            # meta_data['pred_edge']=temp
-        
-            # from SHOW import show_PIL_im_window
-            # show_PIL_im_window(temp[:,0:1,:,:])
-            # tensor=temp[:,0:1,:,:]
-            
-            # if meta_data['pred_edge'] is not None:
-            #     diff=curr_weights.wl_silhouette*(edt*meta_data['pred_edge']).sum()/batch_size
-            #     losses['sil_loss']=diff
-            
             diff=curr_weights.wl_silhouette*(edt*temp).sum()/batch_size
-            
             losses['sil_loss']=diff
-        
             meta_data['step']=meta_data['step']+1
         
-        ##################################
-        if smplifyx_cfg.use_coap_loss and hasattr(body_model, 'coap') and curr_weights.selfpen_weight!=0:
-            coap_loss=0.
-            coap_bs_at_a_time=smplifyx_cfg.coap_bs_at_a_time
-            org_B = model_output_vertices.shape[0]
-            iter_num=org_B//coap_bs_at_a_time
-            if iter_num-org_B/coap_bs_at_a_time!=0:
-                iter_num+=1
-            
-            # selfpen_weight=0.1
-            old_body_model_bs=body_model.batch_size
-            
-            for i in range(iter_num):#i=0
-                def get_slice_params(params,idx,bs):
-                    ret_dict={}
-                    # ret_dict['betas']=params['betas']
-                    slice_len=0
-                    for k in params.keys():
-                        if params[k].shape[0] != 1:
-                            ret_dict[k]=params[k][idx*bs:(idx+1)*bs]
-                            slice_len=len(ret_dict[k])
-                        else:
-                            ret_dict[k]=params[k]
-                    return ret_dict,slice_len
-                
-                slice_params,slice_len=get_slice_params(body_params,i,coap_bs_at_a_time)
-                body_model.batch_size=slice_len
-                slice_model_output, _ = cal_model_output(vposer, body_model, slice_params)
-                
-                slice_loss, _ = body_model.coap.self_collision_loss(slice_model_output, ret_samples=True)
-                coap_loss+=slice_loss.sum()*curr_weights.selfpen_weight
-                
-            losses['coap_loss']=coap_loss
-            body_model.batch_size=old_body_model_bs
-
-
         ###################################
         #torch.Size([192, 135, 2])
         kpts_diff = lmkall_proj-op_2dkpts
@@ -359,14 +262,6 @@ def create_closure(
                 kpts_diff_rb[:, :25, :][op_valid_flag.bool(), :, :]) / batch_size
             metric['body_joints'] = losses['loss_kpts_body'].clone().detach() / \
                 curr_weights.body_joints_weight
-
-        # bs_norm = torch.linalg.norm(kpts_diff[:, :25, :], ord=2, dim=-1)
-        # filter_norm = (bs_norm[op_kpts_org_data[:, :25, -1] > 0.2])
-        # metric['body/pixel'] = filter_norm.max()
-
-        # bs_norm = torch.linalg.norm(kpts_diff[:, 25:67, :], ord=2, dim=-1)
-        # filter_norm = (bs_norm[op_kpts_org_data[:, 25:67, -1] > 0.2])
-        # metric['hand/pixel'] = filter_norm.max()
 
         ###################################
         if curr_weights.w_deca_inner != 0:

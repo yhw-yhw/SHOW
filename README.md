@@ -14,7 +14,7 @@
 <a href="mailto:&#109;&#105;&#099;&#097;&#064;&#116;&#117;&#101;&#046;&#109;&#112;&#103;&#046;&#100;&#101;">Email</a>
 </h4> -->
 
-[[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](export.arxiv.org/abs/2212.04420)] [Colab](demo.ipynb)
+[[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](export.arxiv.org/abs/2212.04420)] [[Colab](demo.ipynb)](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)
 
 <p align="center"> 
 <img src="doc/images/overview.png">
@@ -90,7 +90,12 @@ or just install the environment by using attached conda `environment.yml` file w
 
 [TODO]download_models.sh
 
-- [MMPose]: clone git repo, set env: `export mmpose_root = $mmpose_root$`
+- [MMPose]: clone git repo, and set env
+
+  ```bash
+  git clone https://github.com/open-mmlab/mmpose
+  export mmpose_root = $mmpose_root$
+  ```
 
 - [MICA]: you can find the pretrained model in (https://github.com/Zielon/MICA)
   - install python lib for MICA:
@@ -121,10 +126,6 @@ python main.py --speaker_name -1 --all_top_dir ./test/half.mp4
 
 ## Datasets
   
-### Download Links
-
-- [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
-- [[Google Drive]](TODO)
 
 ### Dataset Videos Download
 
@@ -135,6 +136,8 @@ download all videos from `TODO` or youtube, please refer to (https://github.com/
 
 ### Visualize Dataset
 
+After running SHOW, we will get processed data in a pkl file. Here we can visualize pkl from our provided dataset.
+
 ```bash
 python render_pkl_release.py \
 --pkl_file_path test/all.pkl \
@@ -142,6 +145,11 @@ python render_pkl_release.py \
 --output_video_path test/ours.mp4 \
 --smplx_model_path models/smplx/SMPLX_NEUTRAL_2020_org.npz
 ```
+
+### Download Links
+
+- [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
+- [[Google Drive]](TODO)
 
 ### Dataset Description
 
@@ -192,14 +200,14 @@ python render_pkl_release.py \
 - In practice, global orient and transl parameters should be fixed as the first frame and the lower part of the body pose should be fixed as sitting or standing position: [code](post_process.py)
 
 
-## Code Structure
+<!-- ## Code Structure
 
 this code `main.py` does the following things:
 
 - crop intervals from videos
 - prepare data from PIXIE、DECA、Openpose、PyMAF-X、FAN, etc.
 - do smplifyx optimazation
-- refine facial expression
+- refine facial expression -->
 
 ## Citation
 
@@ -232,8 +240,8 @@ If you use this project in your research please cite SHOW:
 
 ## License
 
-This code and model are available for non-commercial scientific research purposes as defined in the [LICENSE]() file.
-By downloading and using the code and model you agree to the terms in the [LICENSE](). 
+This code and model are available for non-commercial scientific research purposes as defined in the [LICENSE](LICENSE) file.
+By downloading and using the code and model you agree to the terms in the [LICENSE](LICENSE). 
 
 ## Acknowledgements
 
@@ -241,12 +249,13 @@ For functions or scripts that are based on external sources, we acknowledge the 
 Here are some great resources we benefit: 
  
 - [DECA](https://github.com/YadiraF/DECA) for face expression initialization
-- [PIXIE](https://pixie.is.tue.mpg.de/) for parameters initialization
-- [DeepLab] for person segmentation
-- [MICA](https://github.com/Zielon/MICA) for face tracking
+- [PIXIE](https://pixie.is.tue.mpg.de/) and [PyMAF-X](https://github.com/HongwenZhang/PyMAF-X) for SMPL-X parameters initialization
+- [DeepLab](https://github.com/leimao/DeepLab-V3) for person segmentation
+- [MICA](https://github.com/Zielon/MICA) and [https://github.com/HavenFeng/photometric_optimization] for face tracking
 - [Pytorch3D](https://pytorch3d.org/) for rendering  
 - [FAN](https://github.com/1adrianb/2D-and-3D-face-alignment) for landmark detection
-- [FLAME](https://flame.is.tue.mpg.de/)
+<!-- - [mediapipe](https://github.com/google/mediapipe) -->
+<!-- - [FLAME](https://flame.is.tue.mpg.de/) -->
   
 ## Contact
 

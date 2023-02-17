@@ -1,0 +1,32 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "current",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "debug",
+      "type": "python",
+      "request": "launch",
+      "program": "demos/demo_align_deca.py",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+
+      "args": [
+          "--posepath",
+          "C:\\Users\\lithiumice\\code\\PIXIE\\out\\image_seqs\\seq1",
+          "--savefolder",
+          "C:\\Users\\lithiumice\\code\\PIXIE\\out\\pixie_modify_out_seqs\\seq1",
+          "--use_deca", "True"
+      ]
+
+    }
+  ]
+}
