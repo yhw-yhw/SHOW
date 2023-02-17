@@ -9,12 +9,10 @@
 
 <!-- ![Teaser SHOW](doc/images/overview.png) -->
 
-<p align="center">The architecture of SHOW. Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. <p align="center">
-
-This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Please refer to the [arXiv paper](export.arxiv.org/abs/2212.04420) for more details.
+This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. Please refer to the [arXiv paper](export.arxiv.org/abs/2212.04420) for more details.
 
 
-What you can use:
+**What you can use**:
 
 * **easy and efficient:** adapts SMPLify-X to the videos of
 talking persons with several good practices.
