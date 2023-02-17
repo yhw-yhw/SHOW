@@ -18,8 +18,8 @@ This repository provides the official implementation of SHOW(Synchronous HOlisti
 talking persons with several good practices.
 * **state-of-art:** Compared to other methods, ours produces more accurate and stable results with details.
 
-![demo](doc/images/rec_results_detial.png)
-- [ ] demo video
+<!-- ![demo](doc/images/rec_results_detial.png) -->
+<!-- - [ ] demo video -->
 
 ## Getting Started
 
