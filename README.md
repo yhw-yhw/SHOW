@@ -227,7 +227,8 @@ By downloading and using the code and model you agree to the terms in the [LICEN
 
 ## Acknowledgements
 
-For functions or scripts that are based on external sources, we acknowledge the origin individually in each file.  
+For functions or scripts that are based on external sources, we acknowledge the origin individually in each file. We specifically thanks [WOJCIECH ZIELONKA](https://zielon.github.io/) and [Justus Thies](https://justusthies.github.io/)for sharing their face tracking codebase.
+
 Here are some great resources we benefit: 
  
 - [DECA](https://github.com/YadiraF/DECA) for face expression initialization
