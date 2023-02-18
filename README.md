@@ -18,10 +18,13 @@ This repository provides the official implementation of SHOW(Synchronous HOlisti
 talking persons with several good practices.
 * **state-of-art:** Compared to other methods, ours produces more accurate and stable results with details.
 
-<!-- ![demo](doc/images/rec_results_detial.png) -->
-<!-- - [ ] demo video -->
+<p align="center"> 
+<img src="doc/show.gif">
+</p>
 
 ## Getting Started
+
+Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)
 
 ### Installation
 
@@ -34,23 +37,19 @@ cd SHOW && pip install -v -e .
 
 ### Requirements
 
-* Python 3.7 (numpy, skimage, scipy, opencv)  
-* PyTorch >= 1.6 (pytorch3d) 
-  
 Note that Pytorch3D may require manuall installation (see instructions [here](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)).
 
 You can run 
 
 ```bash
-pip install -r requirements.txt
-pip install -r tools/env/req_parts/t0.txt
-pip install -r tools/env/req_parts/t1.txt
-pip install -r tools/env/req_parts/t2.txt
-pip install -r tools/env/req_parts/t3.txt
-pip install -r tools/env/req_parts/t4.txt
+cd SHOW/modules/MICA && pip install -r req.txt
+cd SHOW/modules/PIXIE && pip install -r requirements.txt
+cd SHOW/modules/PyMAF && pip install -r requirements.txt
+cd SHOW/modules/DECA && pip install -r requirements.txt
+cd SHOW && pip install -r requirements.txt
 ```
 
-Or use virtual environment by runing 
+Using virtual environment by runing 
 
 ```bash
 bash install_conda.sh
@@ -59,18 +58,27 @@ eval "$(conda shell.bash hook)"
 conda activate env_SHOW
 ```
 
-install pytorch using
+install pytorch using `pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116` or
 
 ```bash
-conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
+conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
 ```
-
-or just install the environment by using attached conda `environment.yml` file with the command 
-``conda env create -f environment.yml``.
 
 ### Preliminary
 
-- [ ] download_models.sh
+- download packed model files
+  
+  ```bash
+  git clone https://github.com/yhw-yhw/SHOW.git
+  git clone https://github.com/open-mmlab/mmpose
+  export mmpose_root = /content/mmpose
+  wget https://www.dropbox.com/s/gqdcu51ilo44k3i/models.zip?dl=0 -O models.zip
+  wget https://www.dropbox.com/s/r14bl9mhvngohla/data.zip?dl=0 -O data.zip
+  unzip data.zip
+  7za x models.zip
+  ```
+
+- [OpenPose]: follow the code from [OpenPose Colab notebook](https://colab.research.google.com/github/tugstugi/dl-colab-notebooks/blob/master/notebooks/OpenPose.ipynb, and change OpenPose bin path `openpose_root_path` and `openpose_bin_path` in `configs\configs\local_machine_cfg.py`.
 
 - [MMPose]: clone git repo, and set env
 
@@ -86,6 +94,7 @@ or just install the environment by using attached conda `environment.yml` file w
     cd modules/MICA
     pip install -r req.txt
     ```
+
 - [PIXIE]: follow the installation instruction in (modules/PIXIE/README.md)
   - install python lib for MICA:
 
@@ -107,14 +116,10 @@ python main.py --speaker_name -1 --all_top_dir ./test/half.mp4
 ```
 
 ## Datasets
-  
 
-### Dataset Videos Download
+### Download Dataset Videos
 
-#### Prerequisits for data download
-
-download all videos from `TODO` or youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```tools\datasets\download_youtube.py```, remember to install `yt-dlp`. using  `tools\datasets\SHOW_intervals_subject4.csv` for video interval cropping.
-
+Download all videos from youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```download_youtube.py```, remember to install `yt-dlp`. After downloading all videos, you can using  `SHOW_intervals_subject4.csv` for video interval cropping.
 
 ### Visualize Dataset
 
@@ -130,8 +135,9 @@ python render_pkl_release.py \
 
 ### Download Links
 
+The data reconstructed by SHOW is released, you can download it
+
 - [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
-- [[Google Drive]](TODO)
 
 ### Dataset Description
 
@@ -181,16 +187,6 @@ python render_pkl_release.py \
 
 - In practice, global orient and transl parameters should be fixed as the first frame and the lower part of the body pose should be fixed as sitting or standing position: [code](post_process.py)
 
-
-<!-- ## Code Structure
-
-this code `main.py` does the following things:
-
-- crop intervals from videos
-- prepare data from PIXIE、DECA、Openpose、PyMAF-X、FAN, etc.
-- do smplifyx optimazation
-- refine facial expression -->
-
 ## Citation
 
 If you use this project in your research please cite SHOW:
@@ -231,14 +227,13 @@ For functions or scripts that are based on external sources, we acknowledge the 
 
 Here are some great resources we benefit: 
  
+- [SMPLify-X](https://smpl-x.is.tue.mpg.de/)
 - [DECA](https://github.com/YadiraF/DECA) for face expression initialization
 - [PIXIE](https://pixie.is.tue.mpg.de/) and [PyMAF-X](https://github.com/HongwenZhang/PyMAF-X) for SMPL-X parameters initialization
 - [DeepLab](https://github.com/leimao/DeepLab-V3) for person segmentation
 - [MICA](https://github.com/Zielon/MICA) and [https://github.com/HavenFeng/photometric_optimization] for face tracking
 - [Pytorch3D](https://pytorch3d.org/) for rendering  
 - [FAN](https://github.com/1adrianb/2D-and-3D-face-alignment) for landmark detection
-<!-- - [mediapipe](https://github.com/google/mediapipe) -->
-<!-- - [FLAME](https://flame.is.tue.mpg.de/) -->
   
 ## Contact
 
