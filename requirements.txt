@@ -34,3 +34,4 @@ tensor-sensor
 mmcv==1.6.1
 mmhuman3d
 mediapipe
+facenet_pytorch

@@ -9997,7 +9997,7 @@
         "kind": 5,
         "importPath": "configs.configs.MPI_machine_cfg",
         "description": "configs.configs.MPI_machine_cfg",
-        "peekOfCode": "ffmpeg_path = '/usr/bin/ffmpeg'\nopenpose_root_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose'\nopenpose_bin_path_str = 'examples/openpose/openpose.bin'\nopenpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0",
+        "peekOfCode": "ffmpeg_path = '/usr/bin/ffmpeg'\n# openpose_root_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose'\n# openpose_bin_path_str = 'examples/openpose/openpose.bin'\n# openpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'\nopenpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"",
         "detail": "configs.configs.MPI_machine_cfg",
         "documentation": {}
     },
@@ -10006,16 +10006,7 @@
         "kind": 5,
         "importPath": "configs.configs.MPI_machine_cfg",
         "description": "configs.configs.MPI_machine_cfg",
-        "peekOfCode": "openpose_root_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose'\nopenpose_bin_path_str = 'examples/openpose/openpose.bin'\nopenpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0\nfps=30",
-        "detail": "configs.configs.MPI_machine_cfg",
-        "documentation": {}
-    },
-    {
-        "label": "openpose_bin_path_str",
-        "kind": 5,
-        "importPath": "configs.configs.MPI_machine_cfg",
-        "description": "configs.configs.MPI_machine_cfg",
-        "peekOfCode": "openpose_bin_path_str = 'examples/openpose/openpose.bin'\nopenpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0\nfps=30\nbs_at_a_time=50",
+        "peekOfCode": "openpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0\nfps=30\nbs_at_a_time=50",
         "detail": "configs.configs.MPI_machine_cfg",
         "documentation": {}
     },
@@ -10024,7 +10015,7 @@
         "kind": 5,
         "importPath": "configs.configs.MPI_machine_cfg",
         "description": "configs.configs.MPI_machine_cfg",
-        "peekOfCode": "openpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0\nfps=30\nbs_at_a_time=50\ncoap_bs_at_a_time=400",
+        "peekOfCode": "openpose_bin_path = 'build/examples/openpose/openpose.bin'\n# /is/cluster/work/hyi/ExpressiveBody/datasets/\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 0\nfps=30\nbs_at_a_time=50\ncoap_bs_at_a_time=400",
         "detail": "configs.configs.MPI_machine_cfg",
         "documentation": {}
     },

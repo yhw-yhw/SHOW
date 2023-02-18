@@ -1,8 +1,10 @@
 
 ffmpeg_path = '/usr/bin/ffmpeg'
-openpose_root_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose'
-openpose_bin_path_str = 'examples/openpose/openpose.bin'
-openpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'
+# openpose_root_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose'
+# openpose_bin_path_str = 'examples/openpose/openpose.bin'
+# openpose_bin_path = '/is/cluster/scratch/hyi/ExpressiveBody/openpose/Q6000/examples/openpose/openpose.bin'
+openpose_root_path = '/content/openpose'
+openpose_bin_path = 'build/examples/openpose/openpose.bin'
 
 # /is/cluster/work/hyi/ExpressiveBody/datasets/
 video_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'
