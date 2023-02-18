@@ -215,6 +215,18 @@ If you use this project in your research please cite SHOW:
     mask_c2 = (~ mask_d2) * mask_d0_nd1
     mask_c3 = (~ mask_d2) * (~ mask_d0_nd1)
    ```
+   
+````
+## Citation
+If you find our work useful to your research, please consider citing:
+```
+@article{yi2022generating,
+  title={Generating Holistic 3D Human Motion from Speech},
+  author={Yi, Hongwei and Liang, Hualin and Liu, Yifei and Cao, Qiong and Wen, Yandong and Bolkart, Timo and Tao, Dacheng and Black, Michael J},
+  journal={arXiv preprint arXiv:2212.04420},
+  year={2022}
+}
+```
 
 ## License
 
