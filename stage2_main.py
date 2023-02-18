@@ -77,6 +77,7 @@ from SHOW.utils import is_valid_json
 from configs.cfg_ins import condor_cfg
 
 
+@logger.catch
 def SHOW_stage2(*args, **kwargs):
 
     machine_info = SHOW.get_machine_info()

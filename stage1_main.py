@@ -87,6 +87,7 @@ from configs.cfg_ins import condor_cfg
 from SHOW.datasets.model_func_atach import atach_model_func
 
 
+@logger.catch
 def SHOW_stage1(*args, **kwargs):
 
     machine_info = SHOW.get_machine_info()

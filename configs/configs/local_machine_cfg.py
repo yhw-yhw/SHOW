@@ -1,6 +1,8 @@
 ffmpeg_path = 'ffmpeg'
-openpose_root_path = r'C:\Users\lithiumice\code\openpose'
-openpose_bin_path = r'bin\OpenPoseDemo.exe'
+# openpose_root_path = r'C:\Users\lithiumice\code\openpose'
+# openpose_bin_path = r'bin\OpenPoseDemo.exe'
+openpose_root_path = '/content/openpose'
+openpose_bin_path = 'build/examples/openpose'
 
 video_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'
 # intervals_csv_path: str = "{{ fileDirname }}/../data_csv/data_merge.csv"

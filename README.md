@@ -112,7 +112,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvi
 running SHOW on demo video
 
 ```bash
-python main.py --speaker_name -1 --all_top_dir ./test/half.mp4
+python main.py --speaker_name -1 --all_top_dir ./test/demo_video/half.mp4
 ```
 
 ## Datasets

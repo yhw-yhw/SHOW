@@ -449,30 +449,6 @@
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
         "label": "platform",
         "kind": 6,
         "isExtraImport": true,
@@ -983,14 +959,6 @@
         "documentation": {}
     },
     {
-        "label": "EasyDict",
-        "importPath": "easydict",
-        "description": "easydict",
-        "isExtraImport": true,
-        "detail": "easydict",
-        "documentation": {}
-    },
-    {
         "label": "speaker_info",
         "importPath": "configs.configs.speaker_info",
         "description": "configs.configs.speaker_info",
@@ -1004,30 +972,6 @@
         "isExtraImport": true,
         "importPath": "loguru",
         "description": "loguru",
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
         "detail": "loguru",
         "documentation": {}
     },
@@ -3617,14 +3561,6 @@
         "documentation": {}
     },
     {
-        "label": "unicode_literals",
-        "importPath": "__future__",
-        "description": "__future__",
-        "isExtraImport": true,
-        "detail": "__future__",
-        "documentation": {}
-    },
-    {
         "label": "glob",
         "kind": 6,
         "isExtraImport": true,
@@ -5697,22 +5633,6 @@
         "documentation": {}
     },
     {
-        "label": "tqdm",
-        "importPath": "tqdm",
-        "description": "tqdm",
-        "isExtraImport": true,
-        "detail": "tqdm",
-        "documentation": {}
-    },
-    {
-        "label": "tqdm",
-        "importPath": "tqdm",
-        "description": "tqdm",
-        "isExtraImport": true,
-        "detail": "tqdm",
-        "documentation": {}
-    },
-    {
         "label": "morphology",
         "importPath": "scipy.ndimage",
         "description": "scipy.ndimage",
@@ -7463,14 +7383,6 @@
         "isExtraImport": true,
         "importPath": "subprocess",
         "description": "subprocess",
-        "detail": "subprocess",
-        "documentation": {}
-    },
-    {
-        "label": "call",
-        "importPath": "subprocess",
-        "description": "subprocess",
-        "isExtraImport": true,
         "detail": "subprocess",
         "documentation": {}
     },
@@ -9329,14 +9241,6 @@
         "documentation": {}
     },
     {
-        "label": "images_to_video",
-        "importPath": "mmhuman3d.utils.ffmpeg_utils",
-        "description": "mmhuman3d.utils.ffmpeg_utils",
-        "isExtraImport": true,
-        "detail": "mmhuman3d.utils.ffmpeg_utils",
-        "documentation": {}
-    },
-    {
         "label": "mediapipe",
         "kind": 6,
         "isExtraImport": true,
@@ -10066,7 +9970,7 @@
         "kind": 5,
         "importPath": "configs.configs.local_machine_cfg",
         "description": "configs.configs.local_machine_cfg",
-        "peekOfCode": "ffmpeg_path = 'ffmpeg'\nopenpose_root_path = r'C:\\Users\\lithiumice\\code\\openpose'\nopenpose_bin_path = r'bin\\OpenPoseDemo.exe'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=15",
+        "peekOfCode": "ffmpeg_path = 'ffmpeg'\n# openpose_root_path = r'C:\\Users\\lithiumice\\code\\openpose'\n# openpose_bin_path = r'bin\\OpenPoseDemo.exe'\nopenpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1",
         "detail": "configs.configs.local_machine_cfg",
         "documentation": {}
     },
@@ -10075,7 +9979,7 @@
         "kind": 5,
         "importPath": "configs.configs.local_machine_cfg",
         "description": "configs.configs.local_machine_cfg",
-        "peekOfCode": "openpose_root_path = r'C:\\Users\\lithiumice\\code\\openpose'\nopenpose_bin_path = r'bin\\OpenPoseDemo.exe'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=15\n# 跑face tracker的bs",
+        "peekOfCode": "openpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=15\n# 跑face tracker的bs",
         "detail": "configs.configs.local_machine_cfg",
         "documentation": {}
     },
@@ -10084,7 +9988,7 @@
         "kind": 5,
         "importPath": "configs.configs.local_machine_cfg",
         "description": "configs.configs.local_machine_cfg",
-        "peekOfCode": "openpose_bin_path = r'bin\\OpenPoseDemo.exe'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=15\n# 跑face tracker的bs\nbs_at_a_time=3",
+        "peekOfCode": "openpose_bin_path = 'build/examples/openpose'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop'\n# intervals_csv_path: str = \"{{ fileDirname }}/../data_csv/data_merge.csv\"\nintervals_csv_path: str = r'C:\\Users\\lithiumice\\code\\speech2gesture_dataset\\raw_videos\\TED\\TED.csv'\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=15\n# 跑face tracker的bs\nbs_at_a_time=3",
         "detail": "configs.configs.local_machine_cfg",
         "documentation": {}
     },
@@ -31443,123 +31347,6 @@
         "description": "SHOW.tracker_rasterizer",
         "peekOfCode": "class TrackerRasterizer(MeshRasterizer):\n    def __init__(self, image_size, cameras) -> None:\n        settings = RasterizationSettings()\n        settings.image_size = (image_size, image_size)\n        settings.perspective_correct = True\n        settings.cull_backfaces = True\n        super().__init__(cameras, settings)\n        self.reset()\n    def reset(self):\n        self.bary_coords = None",
         "detail": "SHOW.tracker_rasterizer",
-        "documentation": {}
-    },
-    {
-        "label": "parser",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "parser = argparse.ArgumentParser()\nparser.add_argument('-base_path', '--base_path', help='base folder path of dataset')\nparser.add_argument('-speaker', '--speaker',\n                    help='download videos of a specific speaker {oliver, jon, conan, rock, chemistry, ellen, almaram, angelica, seth, shelly}')\nargs = parser.parse_args()\nBASE_PATH = args.base_path\ndf = pd.read_csv(os.path.join(BASE_PATH, \"videos_links.csv\"))\nif args.speaker:\n    df = df[df['speaker'] == args.speaker]\ntemp_output_path = './tmp2/temp_video.mp4'",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "args",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "args = parser.parse_args()\nBASE_PATH = args.base_path\ndf = pd.read_csv(os.path.join(BASE_PATH, \"videos_links.csv\"))\nif args.speaker:\n    df = df[df['speaker'] == args.speaker]\ntemp_output_path = './tmp2/temp_video.mp4'\nfor _, row in tqdm(df.iterrows(), total=df.shape[0]):\n    i, name, link = row\n    if 'youtube' in link:\n        try:",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "BASE_PATH",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "BASE_PATH = args.base_path\ndf = pd.read_csv(os.path.join(BASE_PATH, \"videos_links.csv\"))\nif args.speaker:\n    df = df[df['speaker'] == args.speaker]\ntemp_output_path = './tmp2/temp_video.mp4'\nfor _, row in tqdm(df.iterrows(), total=df.shape[0]):\n    i, name, link = row\n    if 'youtube' in link:\n        try:\n            output_path = os.path.join(BASE_PATH, row[\"speaker\"], \"videos\", row[\"video_fn\"])",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "df",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "df = pd.read_csv(os.path.join(BASE_PATH, \"videos_links.csv\"))\nif args.speaker:\n    df = df[df['speaker'] == args.speaker]\ntemp_output_path = './tmp2/temp_video.mp4'\nfor _, row in tqdm(df.iterrows(), total=df.shape[0]):\n    i, name, link = row\n    if 'youtube' in link:\n        try:\n            output_path = os.path.join(BASE_PATH, row[\"speaker\"], \"videos\", row[\"video_fn\"])\n            if not (os.path.exists(os.path.dirname(output_path))):",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "temp_output_path",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "temp_output_path = './tmp2/temp_video.mp4'\nfor _, row in tqdm(df.iterrows(), total=df.shape[0]):\n    i, name, link = row\n    if 'youtube' in link:\n        try:\n            output_path = os.path.join(BASE_PATH, row[\"speaker\"], \"videos\", row[\"video_fn\"])\n            if not (os.path.exists(os.path.dirname(output_path))):\n                os.makedirs(os.path.dirname(output_path))\n            command = 'yt-dlp -o {temp_path} -f mp4 {link}'.format(link=link, temp_path=temp_output_path)\n            res1 = call(command, shell=True)",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "my_cmd",
-        "kind": 5,
-        "importPath": "tools.datasets.download_youtube",
-        "description": "tools.datasets.download_youtube",
-        "peekOfCode": "my_cmd = 'ls ' + os.path.join(BASE_PATH, row[\"speaker\"], \"videos\") + ' | wc -l'\nos.system(my_cmd)",
-        "detail": "tools.datasets.download_youtube",
-        "documentation": {}
-    },
-    {
-        "label": "global_orient[:,:]",
-        "kind": 5,
-        "importPath": "tools.datasets.post_process",
-        "description": "tools.datasets.post_process",
-        "peekOfCode": "global_orient[:,:] = global_orient[0,:]\ntransl[:,:] = transl[0,:]\nif (\n    speaker == \"oliver\" or\n    speaker == \"seth\" or\n    speaker == \"chemistry\"\n):\n    pose_type='sitting'\nelse:\n    pose_type='standing'",
-        "detail": "tools.datasets.post_process",
-        "documentation": {}
-    },
-    {
-        "label": "transl[:,:]",
-        "kind": 5,
-        "importPath": "tools.datasets.post_process",
-        "description": "tools.datasets.post_process",
-        "peekOfCode": "transl[:,:] = transl[0,:]\nif (\n    speaker == \"oliver\" or\n    speaker == \"seth\" or\n    speaker == \"chemistry\"\n):\n    pose_type='sitting'\nelse:\n    pose_type='standing'\nif pose_type == 'standing':",
-        "detail": "tools.datasets.post_process",
-        "documentation": {}
-    },
-    {
-        "label": "body_pose",
-        "kind": 5,
-        "importPath": "tools.datasets.post_process",
-        "description": "tools.datasets.post_process",
-        "peekOfCode": "body_pose = body_pose_axis.reshape(bs, 63)\nfor i in [1, 2, 4, 5, 7, 8, 10, 11]:\n    body_pose[:, (i - 1) * 3 + 0] = ref_pose[(i) * 3 + 0]\n    body_pose[:, (i - 1) * 3 + 1] = ref_pose[(i) * 3 + 1]\n    body_pose[:, (i - 1) * 3 + 2] = ref_pose[(i) * 3 + 2]",
-        "detail": "tools.datasets.post_process",
-        "documentation": {}
-    },
-    {
-        "label": "save_one_results",
-        "kind": 2,
-        "importPath": "tools.datasets.render_pkl_release",
-        "description": "tools.datasets.render_pkl_release",
-        "peekOfCode": "def save_one_results(\n    vertices,\n    faces,\n    img_size,  #(height,width)\n    center,  #(cx,cy)\n    focal_length,  #(focalx,focaly)\n    camera_pose,  #K:(4,4)\n    meta_data={},\n    color_type='sky',\n    input_renderer=None,",
-        "detail": "tools.datasets.render_pkl_release",
-        "documentation": {}
-    },
-    {
-        "label": "render_pkl_api",
-        "kind": 2,
-        "importPath": "tools.datasets.render_pkl_release",
-        "description": "tools.datasets.render_pkl_release",
-        "peekOfCode": "def render_pkl_api(\n        pkl_file_path,  # pkl path\n        out_images_path,  # image path folder\n        output_video_path=None,  # endwith .mp4\n        smplx_model_path='../models/smplx/SMPLX_NEUTRAL_2020_org.npz',  #smplx neutral 2020 npz file\n        **kwargs):\n    dtype = torch.float32\n    smplx_model_path = os.path.abspath(\n        os.path.join(os.path.dirname(__file__), smplx_model_path))\n    all_var = mmcv.load(pkl_file_path)",
-        "detail": "tools.datasets.render_pkl_release",
-        "documentation": {}
-    },
-    {
-        "label": "DEFAULT_SMPLX_CONFIG",
-        "kind": 5,
-        "importPath": "tools.datasets.render_pkl_release",
-        "description": "tools.datasets.render_pkl_release",
-        "peekOfCode": "DEFAULT_SMPLX_CONFIG = dict(\n    create_global_orient=True,\n    create_body_pose=True,\n    create_betas=True,\n    create_left_hand_pose=True,\n    create_right_hand_pose=True,\n    create_expression=True,\n    create_jaw_pose=True,\n    create_leye_pose=True,\n    create_reye_pose=True,",
-        "detail": "tools.datasets.render_pkl_release",
-        "documentation": {}
-    },
-    {
-        "label": "colors_dict",
-        "kind": 5,
-        "importPath": "tools.datasets.render_pkl_release",
-        "description": "tools.datasets.render_pkl_release",
-        "peekOfCode": "colors_dict = {\n    'red': np.array([0.5, 0.2, 0.2]),\n    'pink': np.array([0.7, 0.5, 0.5]),\n    'neutral': np.array([0.7, 0.7, 0.6]),\n    # 'purple': np.array([0.5, 0.5, 0.7]),\n    'purple': np.array([0.55, 0.4, 0.9]),\n    'green': np.array([0.5, 0.55, 0.3]),\n    'sky': np.array([0.3, 0.5, 0.55]),\n    'white': np.array([1.0, 0.98, 0.94]),\n}",
-        "detail": "tools.datasets.render_pkl_release",
         "documentation": {}
     },
     {
