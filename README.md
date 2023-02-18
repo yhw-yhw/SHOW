@@ -216,7 +216,7 @@ If you use this project in your research please cite SHOW:
     mask_c3 = (~ mask_d2) * (~ mask_d0_nd1)
    ```
    
-````
+
 ## Citation
 If you find our work useful to your research, please consider citing:
 ```
