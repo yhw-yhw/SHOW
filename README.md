@@ -1,7 +1,7 @@
 # SHOW: Synchronous HOlistic body in the Wild
 <b>Generating Holistic 3D Human Motion from Speech</b>
 
-[[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](export.arxiv.org/abs/2212.04420)] [[Colab](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)]
+[[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](https://export.arxiv.org/abs/2212.04420)] [[Colab](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)]
 
 <p align="center"> 
 <img src="doc/images/overview.png">
@@ -9,7 +9,7 @@
 
 <!-- ![Teaser SHOW](doc/images/overview.png) -->
 
-This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. Please refer to the [arXiv paper](export.arxiv.org/abs/2212.04420) for more details.
+This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. Please refer to the [arXiv paper](https://export.arxiv.org/abs/2212.04420) for more details.
 
 
 **What you can use**:
