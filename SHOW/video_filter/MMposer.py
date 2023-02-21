@@ -9,7 +9,7 @@ class MMPoseAnalyzer():
         import os
         mmpose_root = os.environ.get('mmpose_root')
         pose_config = os.path.join(mmpose_root,'configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/hrnet_w48_coco_256x192.py')
-        det_config = os.path.join(mmpose_root,'demo\mmdetection_cfg/faster_rcnn_r50_fpn_coco.py')
+        det_config = os.path.join(mmpose_root,'demo/mmdetection_cfg/faster_rcnn_r50_fpn_coco.py')
         
         pose_checkpoint = 'https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w48_coco_256x192-b9e0b3ab_20200708.pth'
         det_checkpoint = 'https://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_1x_coco/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth'
