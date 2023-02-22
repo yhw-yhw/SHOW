@@ -1,3 +1,4 @@
+import shutil
 from glob import glob
 import os
 import cv2
@@ -109,3 +110,143 @@ def frame_to_video(
     video.release()
     logger.info('frame_to_video finished')
     
+
+def images_to_sorted_images(input_folder, output_folder, img_format='%06d'):
+    """Copy and rename a folder of images into a new folder following the
+    `img_format`.
+
+    Args:
+        input_folder (str): input folder.
+        output_folder (str): output folder.
+        img_format (str, optional): image format name, do not need extension.
+            Defaults to '%06d'.
+
+    Returns:
+        str: image format of the rename images.
+    """
+    img_format = img_format.rsplit('.', 1)[0]
+    file_list = []
+    os.makedirs(output_folder, exist_ok=True)
+    pngs = glob.glob(os.path.join(input_folder, '*.png'))
+    if pngs:
+        ext = 'png'
+    file_list.extend(pngs)
+    jpgs = glob.glob(os.path.join(input_folder, '*.jpg'))
+    if jpgs:
+        ext = 'jpg'
+    file_list.extend(jpgs)
+    file_list.sort()
+    for index, file_name in enumerate(file_list):
+        shutil.copy(
+            file_name,
+            os.path.join(output_folder, (img_format + '.%s') % (index, ext)))
+    return img_format + '.%s' % ext
+
+
+def images_to_video(input_folder: str,
+                    output_path: str,
+                    remove_raw_file: bool = False,
+                    img_format: str = '%06d.png',
+                    fps: Union[int, float] = 30,
+                    resolution: Optional[Union[Tuple[int, int],
+                                               Tuple[float, float]]] = None,
+                    start: int = 0,
+                    end: Optional[int] = None,
+                    disable_log: bool = False) -> None:
+    """Convert a folder of images to a video.
+
+    Args:
+        input_folder (str): input image folder
+        output_path (str): output video file path
+        remove_raw_file (bool, optional): whether remove raw images.
+            Defaults to False.
+        img_format (str, optional): format to name the images].
+            Defaults to '%06d.png'.
+        fps (Union[int, float], optional): output video fps. Defaults to 30.
+        resolution (Optional[Union[Tuple[int, int], Tuple[float, float]]],
+            optional): (height, width) of output.
+            defaults to None.
+        start (int, optional): start frame index. Inclusive.
+            If < 0, will be converted to frame_index range in [0, frame_num].
+            Defaults to 0.
+        end (int, optional): end frame index. Exclusive.
+            Could be positive int or negative int or None.
+            If None, all frames from start till the last frame are included.
+            Defaults to None.
+        disable_log (bool, optional): whether close the ffmepg command info.
+            Defaults to False.
+    Raises:
+        FileNotFoundError: check the input path.
+        FileNotFoundError: check the output path.
+
+    Returns:
+        None
+    """
+    # check_input_path(
+    #     input_folder,
+    #     allowed_suffix=[],
+    #     tag='input image folder',
+    #     path_type='dir')
+    # prepare_output_path(
+    #     output_path,
+    #     allowed_suffix=['.mp4'],
+    #     tag='output video',
+    #     path_type='file',
+    #     overwrite=True)
+    
+    input_folderinfo = Path(input_folder)
+    num_frames = len(os.listdir(input_folder))
+    start = (min(start, num_frames - 1) + num_frames) % num_frames
+    end = (min(end, num_frames - 1) +
+           num_frames) % num_frames if end is not None else num_frames
+    temp_input_folder = None
+    if img_format is None:
+        temp_input_folder = os.path.join(input_folderinfo.parent,
+                                         input_folderinfo.name + '_temp')
+        img_format = images_to_sorted_images(input_folder, temp_input_folder)
+
+    command = [
+        'ffmpeg',
+        '-y',
+        '-threads',
+        '4',
+        '-start_number',
+        f'{start}',
+        '-r',
+        f'{fps}',
+        '-i',
+        f'{input_folder}/{img_format}'
+        if temp_input_folder is None else f'{temp_input_folder}/{img_format}',
+        '-frames:v',
+        f'{end - start}',
+        '-profile:v',
+        'baseline',
+        '-level',
+        '3.0',
+        '-c:v',
+        'libx264',
+        '-pix_fmt',
+        'yuv420p',
+        '-an',
+        '-v',
+        'error',
+        '-loglevel',
+        'error',
+        output_path,
+    ]
+    if resolution:
+        height, width = resolution
+        width += width % 2
+        height += height % 2
+        command.insert(1, '-s')
+        command.insert(2, '%dx%d' % (width, height))
+    if not disable_log:
+        print(f'Running \"{" ".join(command)}\"')
+    subprocess.call(command)
+    if remove_raw_file:
+        if Path(input_folder).is_dir():
+            shutil.rmtree(input_folder)
+    if temp_input_folder is not None:
+        if Path(temp_input_folder).is_dir():
+            shutil.rmtree(temp_input_folder)
+

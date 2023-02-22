@@ -31,7 +31,7 @@ trimesh
 jupyterlab
 plyfile
 tensor-sensor
-mmcv==1.6.1
+mmcv-full
 mmhuman3d
 mediapipe
 facenet_pytorch

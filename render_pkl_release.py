@@ -27,7 +27,7 @@ import mmcv
 import os
 import mmcv
 from loguru import logger
-from mmhuman3d.utils.ffmpeg_utils import images_to_video
+from SHOW.utils.video import images_to_video
 from pathlib import Path
 import trimesh
 import numpy as np

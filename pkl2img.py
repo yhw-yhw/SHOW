@@ -46,8 +46,7 @@ import os
 import mmcv
 import argparse
 from loguru import logger
-from mmhuman3d.utils.ffmpeg_utils import images_to_video
-
+from SHOW.utils.video import images_to_video
 
 def render_pkl_api(
         img_folder,

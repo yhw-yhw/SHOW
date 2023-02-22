@@ -29,7 +29,7 @@ from modules.PIXIE.demos.api_multi_pixie import api_multi_body
 from modules.DECA.demos.api_multi_deca import api_multi_deca
 from SHOW.detector.face_detector import FaceDetector
 from SHOW.video_filter.deeplab_seg import deeplab_seg
-from mmhuman3d.utils.ffmpeg_utils import images_to_video
+from SHOW.utils.video import images_to_video
 import joblib
 import SHOW
 

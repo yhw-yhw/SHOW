@@ -24,7 +24,7 @@ talking persons with several good practices.
 
 ## Getting Started
 
-Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)
+Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing). Alternatively, you can directly run the [ipynb file](SHOW_demo.ipynb) in the Jupyter environment.
 
 ### Installation
 
@@ -38,16 +38,6 @@ cd SHOW && pip install -v -e .
 ### Requirements
 
 Note that Pytorch3D may require manuall installation (see instructions [here](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)).
-
-You can run 
-
-```bash
-cd SHOW/modules/MICA && pip install -r req.txt
-cd SHOW/modules/PIXIE && pip install -r requirements.txt
-cd SHOW/modules/PyMAF && pip install -r requirements.txt
-cd SHOW/modules/DECA && pip install -r requirements.txt
-cd SHOW && pip install -r requirements.txt
-```
 
 Using virtual environment by runing 
 
@@ -64,9 +54,19 @@ install pytorch using `pip3 install torch torchvision torchaudio --extra-index-u
 conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
 ```
 
+You can run 
+
+```bash
+cd SHOW/modules/MICA && pip install -r requirements.txt
+cd SHOW/modules/PIXIE && pip install -r requirements.txt
+cd SHOW/modules/PyMAF && pip install -r requirements.txt
+cd SHOW/modules/DECA && pip install -r requirements.txt
+cd SHOW && pip install -r requirements.txt
+```
+
 ### Preliminary
 
-- download packed model files
+- download packed model files, and put it in the same level directory as SHOW
   
   ```bash
   git clone https://github.com/yhw-yhw/SHOW.git
@@ -85,23 +85,14 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvi
   ```bash
   git clone https://github.com/open-mmlab/mmpose
   export mmpose_root = $mmpose_root$
+
+  git clone https://github.com/open-mmlab/mmdetection
+  cd /content/mmdetection && python setup.py install
   ```
 
-- [MICA]: you can find the pretrained model in (https://github.com/Zielon/MICA)
-  - install python lib for MICA:
+- [MICA]: follow the installation instruction in (modules/MICA/README.md).
   
-    ```bash
-    cd modules/MICA
-    pip install -r req.txt
-    ```
-
 - [PIXIE]: follow the installation instruction in (modules/PIXIE/README.md)
-  - install python lib for MICA:
-
-    ```bash
-    cd modules/PIXIE
-    pip install -r requirements.txt
-    ```
 
 - models for `inisghtface`:
   1) [antelopev2](https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1)
@@ -127,10 +118,10 @@ After running SHOW, we will get processed data in a pkl file. Here we can visual
 
 ```bash
 python render_pkl_release.py \
---pkl_file_path test/all.pkl \
---out_images_path test/ours_images \
---output_video_path test/ours.mp4 \
---smplx_model_path models/smplx/SMPLX_NEUTRAL_2020_org.npz
+--pkl_file_path test/demo_pkl/all.pkl \
+--out_images_path test/demo_pkl/ours_images \
+--output_video_path test/demo_pkl/ours.mp4 \
+--smplx_model_path ../models/smplx/SMPLX_NEUTRAL_2020_org.npz
 ```
 
 ### Download Links
@@ -234,6 +225,7 @@ Here are some great resources we benefit:
 - [MICA](https://github.com/Zielon/MICA) and [https://github.com/HavenFeng/photometric_optimization] for face tracking
 - [Pytorch3D](https://pytorch3d.org/) for rendering  
 - [FAN](https://github.com/1adrianb/2D-and-3D-face-alignment) for landmark detection
+- [arcface-pytorch](https://github.com/ronghuaiyang/arcface-pytorch)
   
 ## Contact
 

@@ -142,3 +142,4 @@ transformations/nerf
 models/*
 
 modules/MICA/demo
+.vscode/PythonImportHelper-v2-Completion.json

@@ -47,7 +47,7 @@ from loguru import logger
 import face_alignment
 import mmcv
 
-from mmhuman3d.utils.ffmpeg_utils import images_to_video
+from SHOW.utils.video import images_to_video
 from torchvision.transforms.functional import gaussian_blur
 from pytorch3d.transforms import axis_angle_to_matrix
 from pytorch3d.renderer import RasterizationSettings, PointLights, MeshRenderer, MeshRasterizer, TexturesVertex, SoftPhongShader, look_at_view_transform, PerspectiveCameras

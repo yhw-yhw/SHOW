@@ -28,6 +28,7 @@ import math
 from . import tensor2numpy
 
 
+
 def test_temporary_val(param: np.ndarray) -> np.ndarray:
     tmp = (param[2:, ...] + param[:-2, ...] - 2 * param[1:-1, ...])
     return np.sum(np.abs(tmp))
