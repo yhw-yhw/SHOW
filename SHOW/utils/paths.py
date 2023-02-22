@@ -79,11 +79,6 @@ def purge_dir(target_dir):
             shutil.rmtree(target_dir)
     # os.makedirs(target_dir, exist_ok=True)
 
-# def purge_dir(dir):
-#     if Path(dir).exists():
-#         import shutil
-#         shutil.rmtree(dir)
-
 def check_makedir(dir):
     dir = osp.abspath(dir)
     root = osp.dirname(dir)

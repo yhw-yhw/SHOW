@@ -27,7 +27,6 @@ import mmcv
 import os
 import mmcv
 from loguru import logger
-from SHOW.utils.video import images_to_video
 from pathlib import Path
 import trimesh
 import numpy as np
@@ -37,6 +36,10 @@ import PIL.Image as pil_img
 import cv2
 import smplx
 from loguru import logger
+
+# from SHOW.utils.video import images_to_video
+from mmhuman3d.utils.ffmpeg_utils import images_to_video
+
 
 DEFAULT_SMPLX_CONFIG = dict(
     create_global_orient=True,
@@ -294,7 +297,7 @@ if __name__ == '__main__':
         '--smplx_model_path',
         type=str,
         default=
-        'C:/Users/lithiumice/code/models/smplx/SMPLX_NEUTRAL_2020_org.npz')
+        'path_to_models/smplx/SMPLX_NEUTRAL_2020_org.npz')
     args = parser.parse_args()
 
     render_pkl_api(pkl_file_path=args.pkl_file_path,

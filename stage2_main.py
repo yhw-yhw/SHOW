@@ -96,16 +96,21 @@ def SHOW_stage2(*args, **kwargs):
     
 
     mmcv.dump(tracker_cfg, tracker_cfg.tracker_cfg_path)
-    gpu_mem = machine_info['gpu_info']['gpu_Total']
-
-    import platform
-    if platform.system() == 'Linux':
-        # 50.0 * 24220 / (65.0*1024)
-        tracker_cfg.bs_at_a_time = int(50.0 * gpu_mem / (80.0 * 1024))
-        logger.warning(f'bs_at_a_time: {tracker_cfg.bs_at_a_time}')
-        if tracker_cfg.bs_at_a_time < 10:
-            return False
     
+    
+    try:
+        gpu_mem = machine_info['gpu_info']['gpu_Total']
+
+        import platform
+        if platform.system() == 'Linux':
+            # 50.0 * 24220 / (65.0*1024)
+            tracker_cfg.bs_at_a_time = int(50.0 * gpu_mem / (80.0 * 1024))
+            logger.warning(f'bs_at_a_time: {tracker_cfg.bs_at_a_time}')
+            if tracker_cfg.bs_at_a_time < 10:
+                return False
+    except:
+        import traceback
+        traceback.print_exc()
 
     Path(tracker_cfg.mica_save_path).mkdir(exist_ok=True, parents=True)
     Path(tracker_cfg.mica_org_out_path).mkdir(exist_ok=True, parents=True)

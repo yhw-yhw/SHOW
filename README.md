@@ -22,9 +22,15 @@ talking persons with several good practices.
 <img src="doc/show.gif">
 </p>
 
+## TODOs
+
+[ ] migrate openpose to alphapose
+
 ## Getting Started
 
-Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing). Alternatively, you can directly run the [ipynb file](SHOW_demo.ipynb) in the Jupyter environment.
+Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing). 
+
+<!-- Alternatively, you can directly run the [ipynb file](SHOW_demo.ipynb) in the Jupyter environment. -->
 
 ### Installation
 
@@ -94,9 +100,12 @@ cd SHOW && pip install -r requirements.txt
   
 - [PIXIE]: follow the installation instruction in (modules/PIXIE/README.md)
 
-- models for `inisghtface`:
+<!-- - models for `inisghtface`:
   1) [antelopev2](https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1)
-  2) [buffalo_l](https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1)
+  2) [buffalo_l](https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1) -->
+
+<!-- wget https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1 -O antelopev2.zip
+wget https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1 -O buffalo_l.zip -->
 
 ### Run
 

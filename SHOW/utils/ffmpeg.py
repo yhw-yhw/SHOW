@@ -14,8 +14,6 @@ from typing import Iterable, List, Optional, Tuple, Union
 
 import numpy as np
 
-from mmhuman3d.utils.path_utils import check_input_path, prepare_output_path
-
 DEFAULT_FONT_FILE_PATH = os.path.join(
     os.path.dirname(__file__), '../../../data/AdobeHeitiStd-Regular2.otf')
 

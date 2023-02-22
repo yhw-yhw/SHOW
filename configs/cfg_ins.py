@@ -16,8 +16,7 @@ gpu_info = SHOW.get_gpu_info()
 
 condor_cfg.merge_from_dict(SHOW.from_rela_path(
     __file__,
-    './configs/MPI_machine_cfg.py' if condor_cfg.is_linux else
-    './configs/local_machine_cfg.py'))
+    './configs/MPI_machine_cfg.py'))
 
 if condor_cfg.is_linux and gpu_info is not None:
     SHOW.set_op_path_by_gpu_name(condor_cfg, gpu_info['gpu_name'])

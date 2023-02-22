@@ -1,8 +1,3 @@
-# {{ fileDirname }}: smplifyx5/condor/configs
-# {{ fileDirname }}/../: smplifyx5/condor
-# {{ fileDirname }}/../../: smplifyx5
-# {{ fileDirname }}/../../../: code_root
-
 video_path_csv: str = '{{ fileDirname }}/../data_csv/videos_links.csv'
 split_csv_path: str = '{{ fileDirname }}/../data_csv/split_scv'
 

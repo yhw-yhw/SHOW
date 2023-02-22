@@ -7,6 +7,7 @@ import subprocess
 import os.path as osp
 from loguru import logger
 from pathlib import Path
+from typing import Iterable, List, Optional, Tuple, Union
 
 
 def video():
@@ -127,11 +128,11 @@ def images_to_sorted_images(input_folder, output_folder, img_format='%06d'):
     img_format = img_format.rsplit('.', 1)[0]
     file_list = []
     os.makedirs(output_folder, exist_ok=True)
-    pngs = glob.glob(os.path.join(input_folder, '*.png'))
+    pngs = glob(os.path.join(input_folder, '*.png'))
     if pngs:
         ext = 'png'
     file_list.extend(pngs)
-    jpgs = glob.glob(os.path.join(input_folder, '*.jpg'))
+    jpgs = glob(os.path.join(input_folder, '*.jpg'))
     if jpgs:
         ext = 'jpg'
     file_list.extend(jpgs)
