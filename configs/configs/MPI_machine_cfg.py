@@ -11,7 +11,7 @@ folder_version: int = 1
 low_res: int = 1
 fps=30
 
-bs_at_a_time=50
+bs_at_a_time=15
 coap_bs_at_a_time=400
 o3d_opt_bs_at_a_time=400
 

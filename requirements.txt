@@ -1,6 +1,3 @@
-bs4
-lxml
-librosa
 yt-dlp
 pandas
 numpy
@@ -19,17 +16,12 @@ face-alignment
 configargparse
 numpy>=1.18.5
 scipy>=1.4.1
-chumpy>=0.69
 scikit-image>=0.15
 opencv-python>=4.1.1
-scikit-image>=0.15
-scipy
-tqdm
 trimesh
-jupyterlab
 plyfile
 tensor-sensor
 mmcv-full
-mmhuman3d
 mediapipe
 facenet_pytorch
+pynvml
