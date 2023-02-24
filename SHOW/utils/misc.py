@@ -103,7 +103,7 @@ def get_gpu_info():
         pynvml.nvmlInit()
         gpu_count= pynvml.nvmlDeviceGetCount()
         handle = pynvml.nvmlDeviceGetHandleByIndex(0)
-        gpu_name=pynvml.nvmlDeviceGetName(handle).decode()
+        gpu_name=pynvml.nvmlDeviceGetName(handle)
         gpu_version=pynvml.nvmlSystemGetDriverVersion()
         info = pynvml.nvmlDeviceGetMemoryInfo(handle)
 

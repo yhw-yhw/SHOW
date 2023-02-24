@@ -260,11 +260,9 @@ def SHOW_stage1(*args, **kwargs):
         meter = MeterBuffer(window_size=6)
         meter.reset()
 
-        if False:
-            pbar = tqdm(position=0,
-                        leave=True,
-                        total=3,
-                        bar_format="{percentage:3.0f}%|{bar}{r_bar}{desc}")
+        pbar = tqdm(position=0,
+                    leave=True,
+                    bar_format="{percentage:3.0f}%|{bar}{r_bar}{desc}")
 
         kpts = lmk_gt_outter[deca_valid_flag.bool(), :, :]
         diff_kpts = kpts[1:, :, :] - kpts[:-1, :, :]
@@ -482,7 +480,9 @@ def SHOW_stage1(*args, **kwargs):
                     }
                     smplifyx_cfg.loggers.log_bs(wandb_log_dict)
                 else:
-                    logger.info(f'{stage}_{global_step}:{log_str}')
+                    # logger.info(f'{stage}_{global_step}:{log_str}')
+                    pbar.set_description(log_str)
+                    pbar.update(1)
 
             meta_data = dict(step=0, pred_edge=None)
             closure = create_closure(

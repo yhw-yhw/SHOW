@@ -671,13 +671,6 @@ def SHOW_stage2(*args, **kwargs):
                                         save_callback,
                                     )
 
-                                if False:
-                                    for k, v in losses.items():
-                                        print(f'{k}: {v.requires_grad}')
-
-                                    for k, v in losses.items():
-                                        print(f'{k}: {v.grad}')
-
                                 if loggers is not None:
                                     loggers.log_bs(losses)
                                     if torch.isnan(all_loss).sum():
@@ -691,19 +684,9 @@ def SHOW_stage2(*args, **kwargs):
                                             '/mica_opt_nan.info', 'a').close()
                                         break
 
-                                    if False:
-                                        if (p + 1) % 32 == 0:
-                                            clamp_img = torch.clamp(
-                                                ops['images'][0], 0, 1)
-                                            loggers.log_image(
-                                                f"opt_stage_img/{k}_{p}",
-                                                clamp_img)
                                 else:
-                                    if 1:
-                                        print(f'step {k}_{p}: {log_str}')
-                                    else:
-                                        pbar.set_description(log_str)
-                                        pbar.update(1)
+                                    pbar.set_description(log_str)
+                                    pbar.update(1)
 
                                 optimizer.zero_grad()
                                 all_loss.backward()
