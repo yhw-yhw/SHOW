@@ -12,7 +12,6 @@ from scipy.io import loadmat, savemat
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d as plt3
 from mpl_toolkits.mplot3d import Axes3D
-import scenepic as sp
 import shutil, argparse, subprocess, time, json, glob, pickle, yaml
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
