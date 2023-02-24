@@ -41,38 +41,36 @@ pip install git+https://github.com/yhw-yhw/SHOW.git
 cd SHOW && pip install -v -e .
 ```
 
-### Requirements
-
-Note that Pytorch3D may require manuall installation (see instructions [here](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)).
-
-Using virtual environment by runing 
-
-```bash
-bash install_conda.sh
-conda create -n env_SHOW python=3.9
-eval "$(conda shell.bash hook)"
-conda activate env_SHOW
-```
-
-install pytorch using `pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116` or
-
-```bash
-conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
-```
-
-You can run 
-
-```bash
-cd SHOW/modules/MICA && pip install -r requirements.txt
-cd SHOW/modules/PIXIE && pip install -r requirements.txt
-cd SHOW/modules/PyMAF && pip install -r requirements.txt
-cd SHOW/modules/DECA && pip install -r requirements.txt
-cd SHOW && pip install -r requirements.txt
-```
-
 ### Preliminary
 
-- download packed model files, and put it in the same level directory as SHOW
+- [environment] Using virtual environment by runing 
+
+  ```bash
+  bash install_conda.sh
+  conda create -n env_SHOW python=3.9
+  eval "$(conda shell.bash hook)"
+  conda activate env_SHOW
+  ```
+
+  install pytorch using `pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116` or
+
+  ```bash
+  conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
+  ```
+
+  You can run 
+
+  ```bash
+  cd SHOW/modules/MICA && pip install -r requirements.txt
+  cd SHOW/modules/PIXIE && pip install -r requirements.txt
+  cd SHOW/modules/PyMAF && pip install -r requirements.txt
+  cd SHOW/modules/DECA && pip install -r requirements.txt
+  cd SHOW && pip install -r requirements.txt
+  ```
+
+  Note that Pytorch3D may require manuall installation (see instructions [here](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)).
+
+- [models] download packed model files, and put it in the same level directory as SHOW
   
   ```bash
   git clone https://github.com/yhw-yhw/SHOW.git
@@ -89,31 +87,44 @@ cd SHOW && pip install -r requirements.txt
 - [MMPose]: clone git repo, and set env
 
   ```bash
+  pip install openmim
+  mim install mmcv-full
+  git clone https://github.com/open-mmlab/mmdetection
+  cd /content/mmdetection && python setup.py install
   git clone https://github.com/open-mmlab/mmpose
   export mmpose_root = $mmpose_root$
 
-  git clone https://github.com/open-mmlab/mmdetection
-  cd /content/mmdetection && python setup.py install
   ```
 
-- [MICA]: follow the installation instruction in (modules/MICA/README.md).
-  
-- [PIXIE]: follow the installation instruction in (modules/PIXIE/README.md)
-
-<!-- - models for `inisghtface`:
+- models for `inisghtface`:
   1) [antelopev2](https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1)
-  2) [buffalo_l](https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1) -->
+  2) [buffalo_l](https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1)
 
-<!-- wget https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1 -O antelopev2.zip
-wget https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1 -O buffalo_l.zip -->
+  run the code below as reference
 
+  ```bash
+  !mkdir -p ~/.insightface/models
+  %cd ~/.insightface/models
+  !wget https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1 -O antelopev2.zip
+  !wget https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1 -O buffalo_l.zip
+  !mkdir -p antelopev2 && cd antelopev2 && unzip -o ../antelopev2.zip
+  !mkdir -p buffalo_l && cd buffalo_l && unzip -o ../buffalo_l.zip
+  ```
+
+  
+- [others] `pip uninstall -y xtcocotools && pip install xtcocotools --no-binary xtcocotools`
+  
 ### Run
 
-running SHOW on demo video
+Run SHOW on demo video
 
 ```bash
 python main.py --speaker_name -1 --all_top_dir ./test/demo_video/half.mp4
 ```
+
+It takes 15-20 minutes for 5s 30 FPS video on Colab Tesla T4.
+
+The final results are stored in `./test/demo_video/ours_exp`. All the smplx variables can be found in `./test/demo_video/ours_exp/final_all.pkl`, and the visualization can be viewed in `./test/demo_video/ours_exp/final_vis.mp4`.
 
 ## Datasets
 

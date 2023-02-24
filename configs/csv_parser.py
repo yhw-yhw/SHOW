@@ -200,11 +200,11 @@ def gen_path_from_ours_root(
         mica_process_path=osp.join(
             mica_all_dir, 'mica_pro'),
         mica_merge_pkl=osp.join(
-            mica_all_dir, 'all.pkl'),
+            mica_all_dir, 'final_all.pkl'),
         mica_obj_root=osp.join(
             mica_all_dir, 'obj'),
         mica_org_out_video=osp.join(
-            mica_all_dir, 'mica_org.mp4'),
+            mica_all_dir, 'final_vis.mp4'),
         mica_grid_video=osp.join(
             mica_all_dir, 'mica_grid.mp4'),
         tracker_cfg_path=osp.join(

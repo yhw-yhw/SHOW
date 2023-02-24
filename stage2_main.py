@@ -106,8 +106,6 @@ def SHOW_stage2(*args, **kwargs):
             # 50.0 * 24220 / (65.0*1024)
             tracker_cfg.bs_at_a_time = int(50.0 * gpu_mem / (80.0 * 1024))
             logger.warning(f'bs_at_a_time: {tracker_cfg.bs_at_a_time}')
-            if tracker_cfg.bs_at_a_time < 10:
-                return False
     except:
         import traceback
         traceback.print_exc()
@@ -825,6 +823,10 @@ def SHOW_stage2(*args, **kwargs):
                         debug_renderer,
                         save_callback,
                     )
+
+    load_data = mmcv.load(tracker_cfg.ours_pkl_file_path)[0]
+    load_data = SHOW.replace_mica_exp(tracker_cfg.mica_all_dir, load_data)
+    mmcv.dump([load_data], tracker_cfg.mica_merge_pkl)
 
     if not Path(tracker_cfg.mica_org_out_video).exists():
         if not SHOW.is_empty_dir(tracker_cfg.mica_org_out_path):
