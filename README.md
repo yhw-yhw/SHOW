@@ -1,5 +1,5 @@
 # SHOW: Synchronous HOlistic body in the Wild
-<b>Generating Holistic 3D Human Motion from Speech</b>
+<b>[CVPR2023] Generating Holistic 3D Human Motion from Speech</b>
 
 [[Project Page](https://talkshow.is.tue.mpg.de)] [[Arxiv](https://export.arxiv.org/abs/2212.04420)] [[Colab](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing)]
 
@@ -202,13 +202,11 @@ The data reconstructed by SHOW is released, you can download it
 
 If you use this project in your research please cite SHOW:
 ```
-@misc{yi2022generating,
-    title={Generating Holistic 3D Human Motion from Speech},
-    author={Hongwei Yi and Hualin Liang and Yifei Liu and Qiong Cao and Yandong Wen and Timo Bolkart and Dacheng Tao and Michael J. Black},
-    year={2022},
-    eprint={2212.04420},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@inproceedings{yi2022generating,
+  title={Generating Holistic 3D Human Motion from Speech},
+  author={Yi, Hongwei and Liang, Hualin and Liu, Yifei and Cao, Qiong and Wen, Yandong and Bolkart, Timo and Tao, Dacheng and Black, Michael J},
+  booktitle={CVPR},
+  year={2023}
 }
 ```
 
