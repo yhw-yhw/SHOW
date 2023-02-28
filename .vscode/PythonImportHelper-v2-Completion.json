@@ -9447,15 +9447,6 @@
         "documentation": {}
     },
     {
-        "label": "scenepic",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "scenepic",
-        "description": "scenepic",
-        "detail": "scenepic",
-        "documentation": {}
-    },
-    {
         "label": "shutil,",
         "kind": 6,
         "isExtraImport": true,
@@ -10039,7 +10030,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "condor_cfg = SHOW.from_rela_path(\n    __file__, \n    './configs/condor_mmcv_cfg.py')\ncondor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))\nif condor_cfg.is_linux and gpu_info is not None:\n    SHOW.set_op_path_by_gpu_name(condor_cfg, gpu_info['gpu_name'])",
+        "peekOfCode": "condor_cfg = SHOW.from_rela_path(\n    __file__, \n    './configs/condor_mmcv_cfg.py')\ncondor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },
@@ -10048,7 +10039,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "condor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))\nif condor_cfg.is_linux and gpu_info is not None:\n    SHOW.set_op_path_by_gpu_name(condor_cfg, gpu_info['gpu_name'])",
+        "peekOfCode": "condor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },
@@ -10057,7 +10048,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "gpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))\nif condor_cfg.is_linux and gpu_info is not None:\n    SHOW.set_op_path_by_gpu_name(condor_cfg, gpu_info['gpu_name'])",
+        "peekOfCode": "gpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },
@@ -30658,7 +30649,7 @@
         "kind": 2,
         "importPath": "SHOW.utils.misc",
         "description": "SHOW.utils.misc",
-        "peekOfCode": "def get_gpu_info():\n    try:\n        import pynvml\n        pynvml.nvmlInit()\n        gpu_count= pynvml.nvmlDeviceGetCount()\n        handle = pynvml.nvmlDeviceGetHandleByIndex(0)\n        gpu_name=pynvml.nvmlDeviceGetName(handle).decode()\n        gpu_version=pynvml.nvmlSystemGetDriverVersion()\n        info = pynvml.nvmlDeviceGetMemoryInfo(handle)\n        B_to_MB=1024*1024",
+        "peekOfCode": "def get_gpu_info():\n    try:\n        import pynvml\n        pynvml.nvmlInit()\n        gpu_count= pynvml.nvmlDeviceGetCount()\n        handle = pynvml.nvmlDeviceGetHandleByIndex(0)\n        gpu_name=pynvml.nvmlDeviceGetName(handle)\n        gpu_version=pynvml.nvmlSystemGetDriverVersion()\n        info = pynvml.nvmlDeviceGetMemoryInfo(handle)\n        B_to_MB=1024*1024",
         "detail": "SHOW.utils.misc",
         "documentation": {}
     },

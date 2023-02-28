@@ -16,4 +16,4 @@ gpu_info = SHOW.get_gpu_info()
 
 condor_cfg.merge_from_dict(SHOW.from_rela_path(
     __file__,
-    './configs/MPI_machine_cfg.py'))
+    './configs/machine_cfg.py'))

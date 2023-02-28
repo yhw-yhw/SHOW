@@ -7,8 +7,6 @@
 <img src="doc/images/overview.png">
 </p>
 
-<!-- ![Teaser SHOW](doc/images/overview.png) -->
-
 This repository provides the official implementation of SHOW(Synchronous HOlistic body in the Wild). Given rgb images or videos only, SHOW can reconstruct holistic whole body mesh results. Please refer to the [arXiv paper](https://export.arxiv.org/abs/2212.04420) for more details.
 
 
@@ -22,10 +20,6 @@ talking persons with several good practices.
 <img src="doc/show.gif">
 </p>
 
-## TODOs
-
-[ ] migrate openpose to alphapose
-
 ## Getting Started
 
 Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing). 
@@ -34,16 +28,16 @@ Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1Z
 
 ### Installation
 
-To install SHOW, please execute:
+To install SHOW, please execute `pip install git+https://github.com/yhw-yhw/SHOW.git` or
 
 ```bash
-pip install git+https://github.com/yhw-yhw/SHOW.git
+git clone https://github.com/yhw-yhw/SHOW.git
 cd SHOW && pip install -v -e .
 ```
 
 ### Preliminary
 
-- [environment] Using virtual environment by runing 
+- [environment] Using virtual environment by runing
 
   ```bash
   bash install_conda.sh
@@ -58,7 +52,7 @@ cd SHOW && pip install -v -e .
   conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
   ```
 
-  You can run 
+  You can run
 
   ```bash
   cd SHOW/modules/MICA && pip install -r requirements.txt
@@ -82,9 +76,9 @@ cd SHOW && pip install -v -e .
   7za x models.zip
   ```
 
-- [OpenPose]: follow the code from [OpenPose Colab notebook](https://colab.research.google.com/github/tugstugi/dl-colab-notebooks/blob/master/notebooks/OpenPose.ipynb, and change OpenPose bin path `openpose_root_path` and `openpose_bin_path` in `configs\configs\local_machine_cfg.py`.
+- [OpenPose]: follow the code from [OpenPose Colab notebook](https://colab.research.google.com/github/tugstugi/dl-colab-notebooks/blob/master/notebooks/OpenPose.ipynb, and change OpenPose bin path `openpose_root_path` and `openpose_bin_path` in `configs\configs\machine_cfg.py`.
 
-- [MMPose]: clone git repo, and set env
+- [MMPose]: Make sure to install mmcv-full, and set env variable `mmpose_root`
 
   ```bash
   pip install openmim
@@ -93,22 +87,21 @@ cd SHOW && pip install -v -e .
   cd /content/mmdetection && python setup.py install
   git clone https://github.com/open-mmlab/mmpose
   export mmpose_root = $mmpose_root$
-
   ```
 
 - models for `inisghtface`:
   1) [antelopev2](https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1)
   2) [buffalo_l](https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1)
 
-  run the code below as reference
+  use the following command as reference
 
   ```bash
-  !mkdir -p ~/.insightface/models
-  %cd ~/.insightface/models
-  !wget https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1 -O antelopev2.zip
-  !wget https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1 -O buffalo_l.zip
-  !mkdir -p antelopev2 && cd antelopev2 && unzip -o ../antelopev2.zip
-  !mkdir -p buffalo_l && cd buffalo_l && unzip -o ../buffalo_l.zip
+  mkdir -p ~/.insightface/models
+  cd ~/.insightface/models
+  wget https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1 -O antelopev2.zip
+  wget https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1 -O buffalo_l.zip
+  mkdir -p antelopev2 && cd antelopev2 && unzip -o ../antelopev2.zip
+  mkdir -p buffalo_l && cd buffalo_l && unzip -o ../buffalo_l.zip
   ```
 
   
@@ -148,7 +141,9 @@ python render_pkl_release.py \
 
 The data reconstructed by SHOW is released, you can download it
 
-- [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)]
+- [[Dropbox]](https://www.dropbox.com/sh/f1gu531w5s2sbqd/AAA2I7oLolEkcXnWI6tnwUpAa?dl=0)
+
+<!-- Larger datasets will be released later -->
 
 ### Dataset Description
 
@@ -161,22 +156,25 @@ The data reconstructed by SHOW is released, you can download it
   - `{speaker}_pkl_tar.tar.gz`:
     - The path format of each file is: `speaker/video_fn/seq_fn.pkl`
     - Data contained in the pkl file:
-      - width，height: the video width and height
-      - center: the center point of the video
-      - batch_size: the sequence length
-      - camera_transl: the displacement of the camera
-      - focal_length: the pixel focal length of a camera
-      - body_pose_axis: (bs, 21, 3)
-      - expression: (bs, 100)
-      - jaw_pose: (bs,3)
-      - betas: (300)
-      - global_orient: (bs,3)
-      - transl: (bs,3)
-      - left_hand_pose: (bs,12)
-      - right_hand_pose: (bs,12)
-      - leye_pose: (bs,3)
-      - reye_pose: (bs,3)
-      - pose_embedding: (bs,32)
+
+    ```bash
+    width，height: the video width and height
+    center: the center point of the video
+    batch_size: the sequence length
+    camera_transl: the displacement of the camera
+    focal_length: the pixel focal length of a camera
+    body_pose_axis: (bs, 21, 3)
+    expression: (bs, 100)
+    jaw_pose: (bs,3)
+    betas: (300)
+    global_orient: (bs,3)
+    transl: (bs,3)
+    left_hand_pose: (bs,12)
+    right_hand_pose: (bs,12)
+    leye_pose: (bs,3)
+    reye_pose: (bs,3)
+    pose_embedding: (bs,32)
+    ```
   
     - Set the config of smplx model as follows:
   
