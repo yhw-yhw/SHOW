@@ -67,9 +67,6 @@ cd SHOW && pip install -v -e .
 - [models] download packed model files, and put it in the same level directory as SHOW
   
   ```bash
-  git clone https://github.com/yhw-yhw/SHOW.git
-  git clone https://github.com/open-mmlab/mmpose
-  export mmpose_root = /content/mmpose
   wget https://www.dropbox.com/s/gqdcu51ilo44k3i/models.zip?dl=0 -O models.zip
   wget https://www.dropbox.com/s/r14bl9mhvngohla/data.zip?dl=0 -O data.zip
   unzip data.zip
@@ -198,7 +195,7 @@ The data reconstructed by SHOW is released, you can download it
 
 ## Citation
 
-If you use this project in your research please cite SHOW:
+If you use this project in your research please cite this paper:
 ```
 @inproceedings{yi2022generating,
   title={Generating Holistic 3D Human Motion from Speech},
@@ -226,7 +223,7 @@ If you use this project in your research please cite SHOW:
 ## License
 
 This code and model are available for non-commercial scientific research purposes as defined in the [LICENSE](LICENSE) file.
-By downloading and using the code and model you agree to the terms in the [LICENSE](LICENSE). 
+By downloading and using the code and model you agree to the terms in the [LICENSE](LICENSE).
 
 ## Acknowledgements
 
@@ -245,6 +242,6 @@ Here are some great resources we benefit:
   
 ## Contact
 
-For questions, please contact talkshow@tue.mpg.de or [hongwei.yi@tuebingen.mpg.de](mailto:hongwei.yi@tuebingen.mpg.de) or [fthualinliang@mail.scut.edu.cn](mailto:fthualinliang@mail.scut.edu.cn).`
+For questions, please contact talkshow@tue.mpg.de or [hongwei.yi@tuebingen.mpg.de](mailto:hongwei.yi@tuebingen.mpg.de) or [fthualinliang@mail.scut.edu.cn](mailto:fthualinliang@mail.scut.edu.cn).
 
 For commercial licensing, please contact ps-licensing@tue.mpg.de

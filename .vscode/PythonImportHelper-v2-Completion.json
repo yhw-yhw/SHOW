@@ -9992,37 +9992,37 @@
     {
         "label": "ffmpeg_path",
         "kind": 5,
-        "importPath": "configs.configs.MPI_machine_cfg",
-        "description": "configs.configs.MPI_machine_cfg",
+        "importPath": "configs.configs.machine_cfg",
+        "description": "configs.configs.machine_cfg",
         "peekOfCode": "ffmpeg_path = '/usr/bin/ffmpeg'\nopenpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose/openpose.bin'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=30\nbs_at_a_time=15",
-        "detail": "configs.configs.MPI_machine_cfg",
+        "detail": "configs.configs.machine_cfg",
         "documentation": {}
     },
     {
         "label": "openpose_root_path",
         "kind": 5,
-        "importPath": "configs.configs.MPI_machine_cfg",
-        "description": "configs.configs.MPI_machine_cfg",
+        "importPath": "configs.configs.machine_cfg",
+        "description": "configs.configs.machine_cfg",
         "peekOfCode": "openpose_root_path = '/content/openpose'\nopenpose_bin_path = 'build/examples/openpose/openpose.bin'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=30\nbs_at_a_time=15\ncoap_bs_at_a_time=400",
-        "detail": "configs.configs.MPI_machine_cfg",
+        "detail": "configs.configs.machine_cfg",
         "documentation": {}
     },
     {
         "label": "openpose_bin_path",
         "kind": 5,
-        "importPath": "configs.configs.MPI_machine_cfg",
-        "description": "configs.configs.MPI_machine_cfg",
+        "importPath": "configs.configs.machine_cfg",
+        "description": "configs.configs.machine_cfg",
         "peekOfCode": "openpose_bin_path = 'build/examples/openpose/openpose.bin'\nvideo_out_base_path: str = '{{ fileDirname }}/../../../speech2gesture_dataset/crop4'\nintervals_csv_path: str = \"{{ fileDirname }}/../data_csv/intervals_sub4.csv\"\nintervals_csv_path_debug: str = \"{{ fileDirname }}/../data_csv/test.csv\"\nfolder_version: int = 1\nlow_res: int = 1\nfps=30\nbs_at_a_time=15\ncoap_bs_at_a_time=400\no3d_opt_bs_at_a_time=400",
-        "detail": "configs.configs.MPI_machine_cfg",
+        "detail": "configs.configs.machine_cfg",
         "documentation": {}
     },
     {
         "label": "request_gpus",
         "kind": 5,
-        "importPath": "configs.configs.MPI_machine_cfg",
-        "description": "configs.configs.MPI_machine_cfg",
+        "importPath": "configs.configs.machine_cfg",
+        "description": "configs.configs.machine_cfg",
         "peekOfCode": "request_gpus = 1",
-        "detail": "configs.configs.MPI_machine_cfg",
+        "detail": "configs.configs.machine_cfg",
         "documentation": {}
     },
     {
@@ -10030,7 +10030,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "condor_cfg = SHOW.from_rela_path(\n    __file__, \n    './configs/condor_mmcv_cfg.py')\ncondor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
+        "peekOfCode": "condor_cfg = SHOW.from_rela_path(\n    __file__, \n    './configs/condor_mmcv_cfg.py')\ncondor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },
@@ -10039,7 +10039,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "condor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
+        "peekOfCode": "condor_cfg.is_linux = 1 if platform.system() == \"Linux\" else 0\ngpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },
@@ -10048,7 +10048,7 @@
         "kind": 5,
         "importPath": "configs.cfg_ins",
         "description": "configs.cfg_ins",
-        "peekOfCode": "gpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/MPI_machine_cfg.py'))",
+        "peekOfCode": "gpu_info = SHOW.get_gpu_info()\ncondor_cfg.merge_from_dict(SHOW.from_rela_path(\n    __file__,\n    './configs/machine_cfg.py'))",
         "detail": "configs.cfg_ins",
         "documentation": {}
     },

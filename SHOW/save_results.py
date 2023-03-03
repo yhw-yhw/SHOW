@@ -126,12 +126,6 @@ def save_one_results(
     color, _ = renderer.render(scene, flags=pyrender.RenderFlags.RGBA)
     color = color.astype(np.float32) / 255.0
 
-    if save_smplpix_name is not None:
-        Path(save_smplpix_name).parent.mkdir(exist_ok=True,parents=True)
-        output_img = color[:, :, :3]
-        output_img = pil_img.fromarray((output_img * 255.).astype(np.uint8))
-        output_img.save(save_smplpix_name)
-
     if input_img!=None:
         if type(input_img)==str:
             # logger.info(f'load input_img:{input_img}')
