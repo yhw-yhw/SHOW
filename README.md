@@ -236,6 +236,7 @@ Here are some great resources we benefit:
 - [PIXIE](https://pixie.is.tue.mpg.de/) and [PyMAF-X](https://github.com/HongwenZhang/PyMAF-X) for SMPL-X parameters initialization
 - [DeepLab](https://github.com/leimao/DeepLab-V3) for person segmentation
 - [MICA](https://github.com/Zielon/MICA) and [https://github.com/HavenFeng/photometric_optimization] for face tracking
+- [MICA_Tracker](https://github.com/Zielon/metrical-tracker)
 - [Pytorch3D](https://pytorch3d.org/) for rendering  
 - [FAN](https://github.com/1adrianb/2D-and-3D-face-alignment) for landmark detection
 - [arcface-pytorch](https://github.com/ronghuaiyang/arcface-pytorch)
