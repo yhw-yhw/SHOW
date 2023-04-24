@@ -40,7 +40,6 @@ cd SHOW && pip install -v -e .
 - [environment] Using virtual environment by runing
 
   ```bash
-  bash install_conda.sh
   conda create -n env_SHOW python=3.9
   eval "$(conda shell.bash hook)"
   conda activate env_SHOW
@@ -55,11 +54,12 @@ cd SHOW && pip install -v -e .
   You can run
 
   ```bash
-  cd SHOW/modules/MICA && pip install -r requirements.txt
-  cd SHOW/modules/PIXIE && pip install -r requirements.txt
-  cd SHOW/modules/PyMAF && pip install -r requirements.txt
-  cd SHOW/modules/DECA && pip install -r requirements.txt
-  cd SHOW && pip install -r requirements.txt
+  cd SHOW
+  cd modules/MICA && pip install -r requirements.txt
+  cd ../PIXIE && pip install -r requirements.txt
+  cd ../PyMAF && pip install -r requirements.txt
+  cd ../DECA && pip install -r requirements.txt
+  cd ../.. && pip install -r requirements.txt
   ```
 
   Note that Pytorch3D may require manuall installation (see instructions [here](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)).
@@ -192,6 +192,18 @@ The data reconstructed by SHOW is released, you can download it
     ```
 
 - In practice, global orient and transl parameters should be fixed as the first frame and the lower part of the body pose should be fixed as sitting or standing position: [code](post_process.py)
+
+### SMPLX expression dim convert tool
+
+[code](cvt_exp_dim_tool.py)
+
+usage
+```
+python cvt_exp_dim_tool.py \
+--target-exp-dim 50 \
+--pkl-path ./rich.npy \
+--model-path ../models/smplx/SMPLX_MALE_shape2019_exp2020.npz
+```
 
 ## Citation
 

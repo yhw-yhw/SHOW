@@ -25,3 +25,4 @@ mmcv-full
 mediapipe
 facenet_pytorch
 pynvml
+tyro
