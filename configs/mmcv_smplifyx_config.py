@@ -55,7 +55,7 @@ use_hand_pose_filter=False
 use_smoothnet_hands=False
 use_smoothnet_pose=False
 re_optim_hands=False
-use_pymaf_hand=False
+use_pymaf_hand=True
 # csv parser will: 
 # 1. add paths configs
 # 2. modify config above

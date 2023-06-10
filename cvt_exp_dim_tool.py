@@ -54,7 +54,11 @@ comm_cfg = EasyDict(
     use_face=True,
 )
 
-all_var = mmcv.load(args.pkl_path)
+# all_var = mmcv.load(args.pkl_path)
+with open(args.pkl_path, 'rb') as f:
+    import pickle
+    all_var = pickle.load(f, encoding='latin1')
+    
 if isinstance(all_var, list):
     all_var = all_var[0]
 all_var = EasyDict(all_var)
@@ -63,7 +67,7 @@ batch_size = comm_cfg.batch_size=all_var.batch_size
 num_pca_comps=all_var.left_hand_pose.shape[1]
 comm_cfg.num_pca_comps=num_pca_comps
 st_et_list = [(0, all_var.batch_size)]
-save_data = np.zeros((all_var.shape[0], 165+args.target_exp_dim), dtype=np.float32)
+save_data = np.zeros((batch_size, 165+args.target_exp_dim), dtype=np.float32)
     
     
 for opt_idx, (start_frame, end_frame) in enumerate(st_et_list):
@@ -72,7 +76,7 @@ for opt_idx, (start_frame, end_frame) in enumerate(st_et_list):
     
     comm_cfg.batch_size = batch_size = end_frame-start_frame
     
-    all_var = {k:v[start_frame:end_frame] for k,v in all_var.items() if isinstance(v, np.ndarray)}
+    all_var = {k:v[start_frame:end_frame] for k,v in all_var.items() if isinstance(v, np.ndarray) and len(v.shape)>=1 and v.shape[0]==all_var.batch_size}
     all_var['betas'] = np.zeros((batch_size, 100), dtype=np.float32)
     all_var['transl'] = np.zeros((batch_size, 3), dtype=np.float32)
     all_var = EasyDict(all_var)

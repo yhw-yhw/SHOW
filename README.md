@@ -24,6 +24,8 @@ talking persons with several good practices.
 
 Take a quick tour on colab: [[Colab]](https://colab.research.google.com/drive/1ZGuRX-m_2xEZ2JGGpvyePTLDBPKFd41I?usp=sharing). 
 
+another [[colab]](https://colab.research.google.com/drive/1D7ZZyLDPnN1AiH0Y6xpX8oK3kUtkofM-?usp=sharing) version from @SlimeVRX
+
 <!-- Alternatively, you can directly run the [ipynb file](SHOW_demo.ipynb) in the Jupyter environment. -->
 
 ### Installation
@@ -120,7 +122,7 @@ The final results are stored in `./test/demo_video/ours_exp`. All the smplx vari
 
 ### Download Dataset Videos
 
-Download all videos from youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```download_youtube.py```, remember to install `yt-dlp`. After downloading all videos, you can using  `SHOW_intervals_subject4.csv` for video interval cropping.
+Download all videos from youtube, please refer to (https://github.com/amirbar/speech2gesture), or using the following script: ```download_youtube.py```, remember to install `yt-dlp`. After downloading all videos, you can using  `SHOW_intervals_subject4.csv` for video interval cropping. oOr download it from https://www.dropbox.com/sh/k3k5iq0hg0y1mjm/AAAar3ObkFPkP4c87sDMggrta?dl=0
 
 ### Visualize Dataset
 
