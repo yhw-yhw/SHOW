@@ -69,8 +69,8 @@ cd SHOW && pip install -v -e .
 - [models] download packed model files, and put it in the same level directory as SHOW
   
   ```bash
-  wget https://www.dropbox.com/s/gqdcu51ilo44k3i/models.zip?dl=0 -O models.zip
-  wget https://www.dropbox.com/s/r14bl9mhvngohla/data.zip?dl=0 -O data.zip
+  wget "https://www.dropbox.com/scl/fi/gwvp5c3yijkjc726bidxx/models.zip?rlkey=2p4m788qpi04oye3kur2pxszx&st=dchhjclv&dl=0" -O models.zip
+  wget "https://www.dropbox.com/scl/fi/vcav90wzwqxmg56n42gr1/data.zip?rlkey=5oetna909azec027v42ogx42q&st=e5mnsldy&dl=0" -O data.zip
   unzip data.zip
   7za x models.zip
   ```
